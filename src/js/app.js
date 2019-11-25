@@ -8,6 +8,7 @@ import { Shop } from './models/Shop';
 import { showCart, addToCartUI, removeFromCartUI, updateItemInCartUI } from './views/shopView';
 import { Like } from './models/Like';
 import { isProductLiked, showLikesOnUI, deleteLikeOnUI } from './views/likesView';
+import { startFirebase, signUp} from './models/Auth';
 
 /* App initial state and all neccessary event listeners to be setup in the dashboard */
 const init = ()=>{
@@ -347,6 +348,21 @@ window.addEventListener('load', ()=>{
     let productAddress = location.href;
     if(productAddress.slice(22, 28) === 'orders'){
         console.log('In the orders page, biish');
+    }
+});
+
+//AUTH CONTROLLER
+/* Start Firebase services */
+document.addEventListener('DOMContentLoaded', ()=>{
+    console.log('Site loading');
+    startFirebase();
+});
+
+/* Open signUp / signIn pop up */
+document.querySelector('body').addEventListener('click', (e)=>{
+    if(e.target.parentNode.className === 'header__menu--icon'){
+        console.log('Tried to login');
+        signUp();
     }
 });
 

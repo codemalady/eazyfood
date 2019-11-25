@@ -185,7 +185,9 @@ body {
         display: inline;
         position: relative; }
         .header__menu ul li:not(:last-child) {
-          margin-right: 6rem; }
+          margin-right: 4rem; }
+        .header__menu ul li:last-child {
+          margin-right: 1rem; }
     .header__menu--item {
       color: white;
       transition: all .3s ease; }
@@ -197,9 +199,10 @@ body {
         border-bottom: 1.25px solid white; }
     .header__menu--icon {
       color: white;
-      font-size: 3rem;
+      font-size: 4rem;
       position: absolute;
-      top: -1rem; }
+      top: -1.5rem;
+      cursor: pointer; }
   .header__content {
     position: absolute;
     top: 35%;
@@ -963,7 +966,7 @@ body {
         .general__main--content--favorites--heading {
           font-size: 2.5rem;
           text-transform: uppercase;
-          color: #dca704; }
+          color: #785b02; }
         .general__main--content--favorites--error {
           font-size: 5rem;
           color: black;
@@ -1006,7 +1009,7 @@ body {
             display: inline-block;
             color: black; }
           .general__main--content--favorites--card--add {
-            color: #dca704; }
+            color: #785b02; }
             .general__main--content--favorites--card--add:link, .general__main--content--favorites--card--add:active {
               text-decoration: none;
               text-transform: uppercase;
@@ -1030,7 +1033,7 @@ body {
         .general__main--content--orders--heading {
           font-size: 2.5rem;
           text-transform: uppercase;
-          color: #dca704; }
+          color: #785b02; }
         .general__main--content--orders--error {
           font-size: 5rem;
           color: black;
@@ -1052,7 +1055,7 @@ body {
             text-transform: uppercase;
             font-size: 1.2rem;
             font-weight: 700;
-            color: #dca704; }
+            color: #785b02; }
           .general__main--content--orders--card--date {
             position: absolute;
             top: 50%;
@@ -1068,7 +1071,7 @@ body {
               text-transform: uppercase;
               font-size: 1.2rem;
               font-weight: 700;
-              color: #dca704; }
+              color: #785b02; }
           .general__main--content--orders--card--price {
             position: absolute;
             top: 50%;
@@ -1083,7 +1086,7 @@ body {
               text-transform: uppercase;
               font-size: 1.2rem;
               font-weight: 700;
-              color: #dca704; }
+              color: #785b02; }
           .general__main--content--orders--card--delivery {
             position: absolute;
             top: 50%;
@@ -1098,7 +1101,7 @@ body {
               text-transform: uppercase;
               font-size: 1.2rem;
               font-weight: 700;
-              color: #dca704; }
+              color: #785b02; }
           .general__main--content--orders--card--action {
             position: absolute;
             top: 50%;
@@ -1113,7 +1116,7 @@ body {
               text-transform: uppercase;
               font-size: 1.2rem;
               font-weight: 700;
-              color: #dca704; }
+              color: #785b02; }
 
 .animated-section {
   animation: moveInLeft .5s ease-out; }

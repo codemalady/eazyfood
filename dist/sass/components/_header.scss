@@ -32,7 +32,11 @@
                 position: relative;
 
                 &:not(:last-child){
-                    margin-right: 6rem;
+                    margin-right: 4rem;
+                }
+
+                &:last-child{
+                    margin-right: 1rem;
                 }
             }
         }
@@ -54,9 +58,10 @@
 
         &--icon{
             color: white;
-            font-size: 3rem;
+            font-size: 4rem;
             position: absolute;
-            top: -1rem;
+            top: -1.5rem;
+            cursor: pointer;
         }
     }
 
