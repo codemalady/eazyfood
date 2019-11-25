@@ -1,0 +1,232 @@
+{
+    "products": [
+        {
+            "name": "Pear",
+            "moq": "10pcs",
+            "productId": "4991",
+            "imageUrl" : "../img/pears.jpg",
+            "price" : "400",
+            "categories" : ["fruits"]
+        },
+        {
+            "name": "Apple - Red",
+            "moq": "6pcs",
+            "productId": "1443",
+            "imageUrl" : "../img/red-apples.jpg",
+            "price" : "700",
+            "categories" : ["fruits"]
+        },
+        {
+            "name": "Apple - Green",
+            "moq": "6pcs",
+            "productId": "2752",
+            "imageUrl" : "../img/apples.jpg",
+            "price" : "650",
+            "categories" : ["fruits"]
+        },
+        {
+            "name": "Avocado",
+            "moq": "6pcs",
+            "productId": "9323",
+            "imageUrl" : "../img/avocado.jpg",
+            "price" : "1500",
+            "categories" : ["fruits"]
+        },
+        {
+            "name": "Banana",
+            "moq": "1kg",
+            "productId": "7300",
+            "imageUrl" : "../img/banana.jpg",
+            "price" : "600",
+            "categories" : ["fruits"]
+        },
+        {
+            "name": "Watermelon",
+            "moq": "1 pc",
+            "productId": "3983",
+            "imageUrl" : "../img/watermelon.jpg",
+            "price" : "300",
+            "categories" : ["fruits"]
+        },
+        {
+            "name": "African Spinach",
+            "localName" : "(Efo Tete)",
+            "moq": "",
+            "productId": "6252",
+            "imageUrl" : "../img/efo-tete.jpg",
+            "price" : "150",
+            "categories" : ["veggies"]
+        },
+        {
+            "name": "Lagos Spinach",
+            "localName": "(Efo-Shoko)",
+            "moq": "",
+            "productId": "6174",
+            "imageUrl" : "../img/efo-shoko.jpeg",
+            "price" : "150",
+            "categories" : ["veggies"]
+        },
+        {
+            "name": "Bay Leaf",
+            "moq": "",
+            "productId": "8620",
+            "imageUrl" : "../img/bayleaf.jpg",
+            "price" : "200",
+            "categories" : ["veggies"]
+        },
+        {
+            "name": "Beetroot",
+            "moq": "4-in-1 pack",
+            "productId": "6640",
+            "imageUrl" : "../img/beetroot.jpg",
+            "price" : "1000",
+            "categories" : ["veggies"]
+        },
+        {
+            "name": "Egg-Plant Leaf",
+            "localName": "(Efo-Ibo)",
+            "moq": "",
+            "productId": "7767",
+            "imageUrl" : "../img/egg-plant.jpg",
+            "price" : "200",
+            "categories" : ["veggies"]
+        },
+        {
+            "name": "Waterleaf",
+            "localName": "(Gbure)",
+            "moq": "",
+            "productId": "5707",
+            "imageUrl" : "../img/waterleaf.jpg",
+            "price" : "150",
+            "categories" : ["veggies"]
+        },
+        {
+            "name": "Cabbage",
+            "moq": "1kg",
+            "productId": "2768",
+            "imageUrl" : "../img/cabbage.jpg",
+            "price" : "500",
+            "categories" : ["veggies"]
+        },
+        {
+            "name": "Broccoli",
+            "moq": "1kg",
+            "productId": "1130",
+            "imageUrl" : "../img/broccoli.jpg",
+            "price" : "4400",
+            "categories" : ["veggies"]
+        },
+        {
+            "name": "Titus",
+            "moq": "",
+            "productId": "6882",
+            "imageUrl" : "../img/fish.jpg",
+            "price" : "400",
+            "categories" : ["seafood"]
+        },
+        {
+            "name": "Kote",
+            "moq": "",
+            "productId": "5524",
+            "imageUrl" : "../img/fish.jpg",
+            "price" : "400",
+            "categories" : ["seafood"]
+        },
+        {
+            "name": "Tomato",
+            "moq": "",
+            "productId": "5227",
+            "imageUrl" : "../img/tomatoes.jpg",
+            "price" : "200",
+            "categories" : ["pepper"]
+        },
+        {
+            "name": "Cayenne Pepper",
+            "moq": "",
+            "productId": "5508",
+            "imageUrl" : "../img/cayenne-pepper.jpg",
+            "price" : "300",
+            "categories" : ["pepper"]
+        },
+        {
+            "name": "Tatashe",
+            "moq": "",
+            "productId": "3208",
+            "imageUrl" : "../img/tatashe.jpg",
+            "price" : "250",
+            "categories" : ["pepper"]
+        },
+        {
+            "name": "Eggs",
+            "moq": "1 crate",
+            "productId": "9361",
+            "imageUrl" : "../img/eggs.jpg",
+            "price" : "500",
+            "categories" : ["poultry"]
+        },
+        {
+            "name": "Carrots",
+            "moq": "5 pcs",
+            "productId": "5253",
+            "imageUrl" : "../img/carrots.jpg",
+            "price" : "250",
+            "categories" : ["veggies", "crops"]
+        },
+        {
+            "name": "Olives",
+            "moq": "1 jar",
+            "productId": "3205",
+            "imageUrl" : "../img/olives.jpg",
+            "price" : "1200",
+            "categories" : ["fruits"]
+        },
+        {
+            "name": "Okra",
+            "moq": "",
+            "productId": "8687",
+            "imageUrl" : "../img/olives.jpg",
+            "price" : "200",
+            "categories" : ["fruits, veggies, crops"]
+        },
+        {
+            "name": "Yam",
+            "moq": "1 pc",
+            "productId": "5105",
+            "imageUrl" : "../img/yam.jpg",
+            "price" : "700",
+            "categories" : ["tubers"]
+        },
+        {
+            "name": "Potatoes",
+            "moq": "5 pcs",
+            "productId": "2718",
+            "imageUrl" : "../img/potatoes.jpg",
+            "price" : "800",
+            "categories" : ["tubers"]
+        },
+        {
+            "name": "Cashew Nuts",
+            "moq": "1 pck",
+            "productId": "7011",
+            "imageUrl" : "../img/cashewnut.jpg",
+            "price" : "500",
+            "categories" : ["nuts"]
+        },
+        {
+            "name": "Bitter Kola",
+            "moq": "",
+            "productId": "4446",
+            "imageUrl" : "../img/bitter-kola.jpg",
+            "price" : "200",
+            "categories" : ["nuts"]
+        },
+        {
+            "name": "Groundnut",
+            "moq": "1 bottle",
+            "productId": "9462",
+            "imageUrl" : "../img/groundnut.jpg",
+            "price" : "400",
+            "categories" : ["nuts"]
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+.preloader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: white;
+    z-index: 5000;
+    // opacity: 0;
+    // visibility: hidden;
+
+    // &.active{
+    //     opacity: 1;
+    //     visibility: visible;
+    // }
+
+    .loader{
+        height: 7rem;
+        width: 7rem;
+        border: .3rem solid $color-primary-light;
+        border-left: .3rem solid $color-primary-dark;
+        border-radius: 50%;
+        animation: rotate 1s linear infinite;
+        position: fixed;
+        top: 45%;
+        left: 45%;
+        transform: translate(-70%, -50%);
+    }
+}

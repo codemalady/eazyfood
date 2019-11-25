@@ -1,0 +1,22 @@
+body{
+    font-family: 'Manjari', sans-serif;
+    font-size: 1.5rem;
+    color: $color-primary;
+}
+
+.section-title{
+    font-size: 4.5rem;
+    transition: all .3s;
+
+    &--white{
+        color: white;
+    }
+
+    &--colored{
+        color: $color-primary;
+    }
+
+    &:hover{
+        transform: skewX(10deg) scale(1.05);
+    }
+}

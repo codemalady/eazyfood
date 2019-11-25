@@ -1,0 +1,44 @@
+.form{
+    &__group{
+        display: inline-block;
+        margin-right: 1rem;
+    }
+
+    &__label{
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: .5rem;
+        text-transform: uppercase;
+    }
+
+    &__input{
+        display: block;
+        font-family: 'Manjari', sans-serif;
+        height: 4rem;
+        width: 18rem;
+        font-size: 1.5rem;
+        border: .1rem solid #f4f4f4;
+        // border: 1px dashed $color-primary;
+
+        &:focus{
+            outline: none;
+        }
+    }
+
+    &__btn{
+        color: white;
+
+        &:link, &:active{
+            display: inline-block;
+            background-color: $color-primary-dark;
+            padding: 1.25rem 3rem;
+            border-radius: .3rem;
+            text-decoration: none;
+        }
+
+        &:hover{
+            background-color: $color-primary-dark; 
+        }
+    }
+}

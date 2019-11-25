@@ -1,0 +1,344 @@
+.general{
+    position: relative;
+    @include clearfix;
+
+    &__sidebar{
+        float: left;
+        width: 7.5%;
+        height: 100vh;
+        // background-color: #EFFAFF;
+        // box-shadow: 0 .1rem 1rem rgba(black, .2);
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        &__btns{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            list-style: none;
+            
+            &--btn{
+                color: $color-primary-dark;
+
+                &:link, &:active{
+                    display: inline-block;
+                    text-decoration: none;
+                    margin-bottom: 3rem;
+                    text-align: center;
+                    height: 5rem;
+                    width: 5rem;
+                    border-radius: 50%;
+                    background-color: white;
+                    position: relative;
+                    box-shadow: 0 1rem 1.5rem rgba(black, .2);
+                    // box-shadow: 0 .5rem 3rem rgba(black, .2);
+                    
+                }
+
+                &:hover &--tooltip{
+                    opacity: 1;
+                }
+
+                &--icon{
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -40%);
+                    font-size: 2rem;
+                }
+
+                &--tooltip{
+                    position: absolute;
+                    // top: 50%;
+                    // right: -6rem;
+                    bottom: -3rem;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    font-size: 1.5rem;
+                    padding: .5rem .5rem .25rem .5rem;
+                    border-radius: .5rem;
+                    color: white;
+                    background-color: rgba(black, .8);
+                    opacity: 0;
+                    transition: all .3s;
+                }
+                
+            }
+        }
+    }
+
+    &__main{
+        float: right;
+        width: 95%;
+
+        &--content{
+            padding: 5rem 0;
+            margin: 0 auto;
+
+            &--banner{
+                width: 80%;
+                height: 30rem;
+                margin: inherit;
+                // background-color: #FEE6D8;
+                background-color: $color-primary-light;
+                border-radius: 1rem;
+                box-shadow: 0 .5rem 1rem rgba(black, .2);
+                cursor: pointer;
+                position: relative;
+                overflow: hidden;
+
+                &--img{
+                    width: 140%;
+                    transform: translate(-8rem, -4rem);
+                }
+
+                &--text{
+                    font-size: 3.5rem;
+                    text-transform: capitalize;
+                    color: black;
+                    width: 40%;
+                    position: absolute;
+                    top: 45%;
+                    transform: translateY(-50%);
+                }
+
+                &--back{
+                    color: $color-primary-dark;
+
+                    &:link, &:active{
+                        font-size: 2rem;
+                        text-decoration: none;
+                        position: absolute;
+                        top: 70%;
+                        transform: translateY(-50%);
+                    }
+                }
+            }
+
+            &--favorites{
+                width: 80%;
+                margin: inherit;
+
+                &--heading{
+                    font-size: 2.5rem;
+                    text-transform: uppercase;
+                    color: $color-primary-dark;
+                }
+
+                &--error{
+                    font-size: 5rem;
+                    color: black;
+                    transform: translateY(7.5rem);
+                }
+
+                &--card{
+                    padding: 1.5rem 4rem;
+                    background-color: white;
+                    border-radius: 1rem;
+                    box-shadow: 0 .5rem 1rem rgba(black, .2);
+                    cursor: pointer;
+                    position: relative;
+
+                    &:not(:last-child){
+                        margin-bottom: 2rem;
+                    }
+
+                    &--icon{
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        display: inline;
+                        color: red;
+                        font-size: 2rem;
+                    }
+
+                    &--img{
+                        width: 10%;
+                        border-radius: .5rem;
+                    }
+
+                    &--title{
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        margin-left: 2rem;
+                        text-transform: capitalize;
+                        width: 50%;
+                        font-size: 2.5rem;
+                        display: inline-block;
+                        color: black;
+                    }
+
+                    &--description{
+                        position: absolute;
+                        top: 50%;
+                        width: 40%;
+                        transform: translate(22rem, -50%);
+                        font-size: 1.5rem;
+                        display: inline-block;
+                        color: black; 
+                    }
+
+                    &--add{
+                        color: $color-primary-dark;
+
+                        &:link, &:active{
+                            text-decoration: none;
+                            text-transform: uppercase;;
+                            position: absolute;
+                            top: 50%;
+                            right: 12rem;
+                            transform: translateY(-50%);
+                        }
+                    }
+
+                    &--delete{
+                        color: red;
+                        display: inline;
+                        
+                        &:link, &:active{
+                            text-decoration: none;
+                            text-transform: uppercase;;
+                            position: absolute;
+                            top: 50%;
+                            right: 4rem;
+                            transform: translateY(-50%);
+                        }
+                    }
+                }
+            }
+
+            &--orders{
+                width: 80%;
+                margin: inherit;
+
+                &--heading{
+                    font-size: 2.5rem;
+                    text-transform: uppercase;
+                    color: $color-primary-dark;
+                }
+
+                &--error{
+                    font-size: 5rem;
+                    color: black;
+                    transform: translateY(7.5rem);
+                }
+
+                &--card{
+                    padding: 1.5rem 4rem;
+                    background-color: white;
+                    border-radius: 1rem;
+                    box-shadow: 0 .5rem 1rem rgba(black, .2);
+                    cursor: pointer;
+                    position: relative;
+
+                    &:not(:last-child){
+                        margin-bottom: 2rem;
+                    }
+
+                    &--text{
+                        &--title{
+                            font-size: 2.5rem;
+                            display: block;
+                            color: black;
+                        }
+    
+                        &--subtitle{
+                            text-transform: uppercase;
+                            font-size: 1.2rem;
+                            font-weight: 700;
+                            color: $color-primary-dark;
+                        }
+                    }
+
+                    &--date{
+                        position: absolute;
+                        top: 50%;
+                        left: 25%;
+                        transform: translateY(-50%);
+                        color: black;
+
+                        &--label{
+                            font-size: 2.5rem;
+                            display: block;
+                            color: black;
+                        }
+
+                        &--value{
+                            color: black;
+                            text-transform: uppercase;
+                            font-size: 1.2rem;
+                            font-weight: 700;
+                            color: $color-primary-dark;
+                        }
+                    }
+
+                    &--price{
+                        position: absolute;
+                        top: 50%;
+                        left: 45%;
+                        transform: translateY(-50%);
+
+                        &--label{
+                            font-size: 2.5rem;
+                            display: block;
+                            color: black;
+                        }
+
+                        &--value{
+                            color: black;
+                            text-transform: uppercase;
+                            font-size: 1.2rem;
+                            font-weight: 700;
+                            color: $color-primary-dark;
+                        }
+                    }
+
+                    &--delivery{
+                        position: absolute;
+                        top: 50%;
+                        right: 25%;
+                        transform: translateY(-50%);
+
+                        &--label{
+                            font-size: 2.5rem;
+                            display: block;
+                            color: black;
+                        }
+
+                        &--value{
+                            color: black;
+                            text-transform: uppercase;
+                            font-size: 1.2rem;
+                            font-weight: 700;
+                            color: $color-primary-dark;
+                        }
+                    }
+
+                    &--action{
+                        position: absolute;
+                        top: 50%;
+                        right: 5rem;
+                        transform: translateY(-50%);
+
+                        &--label{
+                            font-size: 2.5rem;
+                            display: block;
+                            color: black;
+                        }
+
+                        &--value{
+                            color: black;
+                            text-transform: uppercase;
+                            font-size: 1.2rem;
+                            font-weight: 700;
+                            color: $color-primary-dark;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

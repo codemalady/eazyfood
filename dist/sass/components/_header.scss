@@ -1,0 +1,91 @@
+.header{
+    height: 90vh;
+    background-color: $color-primary-light;
+    position: relative;
+    background-image: 
+        linear-gradient(75deg, rgba($color-primary-dark , .5) 0%, rgba($color-primary-dark , .7) 50%, transparent 50%),
+        url('../img/food-table.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+
+    &__logo{
+        height: 6rem;
+
+        &-box{
+            position: absolute;
+            top: 2rem;
+            left: 4rem;;
+        }
+    }
+
+    &__menu{
+        position: absolute;
+        top: 4rem;
+        right: 5rem;
+
+        ul{
+            list-style: none;
+
+            li{
+                display: inline;
+                position: relative;
+
+                &:not(:last-child){
+                    margin-right: 6rem;
+                }
+            }
+        }
+
+        &--item{
+            color: white;
+            transition:  all .3s ease;
+
+            &:link, &:active{
+                text-decoration: none;
+                font-size: 2rem;
+            }
+
+            &:hover{
+                padding-bottom: .3rem;
+                border-bottom: 1.25px solid white;
+            }
+        }
+
+        &--icon{
+            color: white;
+            font-size: 3rem;
+            position: absolute;
+            top: -1rem;
+        }
+    }
+
+    &__content{
+        position: absolute;
+        top: 35%;
+        left: 5%;
+
+        &--text{
+            color: white;
+            width: 40%;
+        }
+
+        &--title{
+            display: inline-block;
+            font-size: 4.5rem;
+            line-height: 4rem;
+        }
+
+        &--subtitle{
+            display: inline-block;
+            font-size: 1.8rem;
+            font-weight: 400;
+            // width: 30%;
+        }
+
+        &--form{
+            color: white;
+        }
+    }
+
+}

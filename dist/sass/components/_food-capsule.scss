@@ -1,0 +1,46 @@
+.food-capsule{
+    height: 10rem;
+    width: 100%;
+    background-color: white;
+    border: .1rem solid #F6F6F5;
+    border-radius: 200rem;
+    cursor: pointer;
+    position: relative;
+
+    &--icon{
+        color: black;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        &-box{
+            height: 4rem;
+            width: 4rem;
+            border-radius: 50%;
+            background-color: white;
+            border: .1rem solid #F6F6F5;
+            margin: 0 auto;
+            transform: translateY(.5rem);
+            position: relative;
+        }
+    }
+
+    &.active, &:hover{
+        background-color: $color-primary;
+        border: .1rem solid transparent;
+
+        &--icon-box{
+            border: .1rem solid transparent;  
+        }
+    }
+
+    &--label{
+        font-size: 1rem;
+        color: black;
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

@@ -1,0 +1,369 @@
+//GLOBAL APP CONTROLLER
+import { DOM } from './base';
+import {Product, fetchProducts} from './models/Product';
+import { showProducts, viewProduct as viewP, closeProduct as closeP, showLoader, hideLoader } from './views/productView';
+import { Search } from './models/Search';
+import { showSearchResults, endCurrentSearch } from './views/searchView';
+import { Shop } from './models/Shop';
+import { showCart, addToCartUI, removeFromCartUI, updateItemInCartUI } from './views/shopView';
+import { Like } from './models/Like';
+import { isProductLiked, showLikesOnUI, deleteLikeOnUI } from './views/likesView';
+
+/* App initial state and all neccessary event listeners to be setup in the dashboard */
+const init = ()=>{
+    setupMenuEventListener();
+    searchListener();
+    toggleProductCategories();
+    showProducts(state.selected, state.products);
+    viewProduct();
+    closeProduct();
+    browserCloseProduct();
+    showCart(state.shoppingList.items, state.shoppingList.sum);
+    addToCart();
+    addToCartInPopup();
+    removeFromCart();
+    updateShoppingList();
+    likeProduct();
+};
+
+/* Global App State */
+const state = {};
+// window.state = state;
+
+//TOGGlE DASHBOARD MENU
+/* Function to toggle the menus if menu input label is checked */
+const toggleMenu = ()=>{
+    if(document.querySelector(DOM["dashboard-menu-toggle"]).checked){
+        document.querySelector(DOM["dashboard-menu"]).style.width= '7%';
+        document.querySelector(DOM["dashboard-menu"]).style.opacity = '1';
+        document.querySelector(DOM["dashboard-menu"]).style.visibility = 'visible';
+    }else{
+        document.querySelector(DOM["dashboard-menu"]).style.width= '0%';
+        document.querySelector(DOM["dashboard-menu"]).style.opacity = '0';
+        document.querySelector(DOM["dashboard-menu"]).style.visibility = 'hidden';
+    }
+}
+/* Event listener to be added to the menu button at initialization of webapp */
+const setupMenuEventListener = ()=>{
+    document.querySelector(DOM["dashboard-menu-toggle"]).checked = false;
+    document.querySelector(DOM["dashboard-menu-toggle"]).addEventListener('click', toggleMenu);
+}
+
+
+//PRODUCT CONTROLLER
+/* Fetch products and assign them to the Product class */
+state.products = new Array();
+window.addEventListener('load', async ()=>{
+    try {
+        let fetchedProducts = await fetchProducts();
+        // console.log('Products still loading');
+        showLoader();
+        if(fetchedProducts){
+            // console.log('Products loaded');
+            hideLoader();
+            for (const product of fetchedProducts.products) {
+                const newProduct = new Product(product.productId, product.name.toLowerCase(), product.imageUrl, product.price, product.moq, product.categories)
+                state.products.push(newProduct);
+            }
+        }
+    } catch (error) {
+        showLoader();
+    }
+
+    init();
+
+    /* Automatically open popup on refresh of page and pass product parameters */
+    const productAddress = window.location.href;
+    const productID = productAddress.slice((productAddress.length-4), productAddress.length);
+    if(window.location.href.includes(productAddress.slice(0, 36))){
+        viewP(productID, state.products);
+    }
+
+    /* Automatically add product to cart from homepage */
+    if(productAddress.slice(37, 40) === 'add'){
+        productToAdd = state.shoppingList.addItems(productID, state.products);
+
+        /* Close popup */
+        closeP();
+
+        /* Calculate total & display in UI */
+        addToCartUI(productToAdd, state.shoppingList.sum);
+    }
+});
+
+
+/* Arrange and sort products by categories */
+state.selected = 'fruits';
+const toggleProductCategories = ()=>{
+    document.querySelector(DOM.dashboard).addEventListener('click', function(e) {
+        let categories = Array.from(document.querySelectorAll(DOM.categories))
+        let categoryClass = DOM.categories.replace('.', '');
+        if(e.target.id !== '' && e.target.className === categoryClass){
+            state.selected = e.target.id;
+            for (const category of categories) {
+                if(category.id === state.selected){
+                    category.classList.toggle('active');
+                }else{
+                    category.classList.remove('active');
+                }
+            }
+        }
+        showProducts(state.selected, state.products);
+    });
+}
+
+/* View product and show product popup */
+const viewProduct = ()=>{
+    document.querySelector(DOM.dashboard).addEventListener('click', (e)=>{
+        if(e.target.className === 'icon-basic-magnifier'){
+            e.preventDefault();
+            const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
+            viewP(productID, state.products);
+        }
+        
+    });
+}
+
+/* Close product details and close product popup */
+const closeProduct = ()=>{
+    document.querySelector('body').addEventListener('click', (e)=>{
+        if(e.target.className === 'product-detail__close' || e.target.className === 'product-detail__close--icon'){
+            closeP();
+        }
+    });
+}
+
+/* Close product details and close product popup with browser back button */
+const browserCloseProduct = ()=>{
+    window.addEventListener('popstate', ()=>{
+        history.replaceState(null, null, '/dashboard.html');
+        closeP();
+    });
+}
+
+
+//SEARCH CONTROLLER
+const searchListener = ()=>{
+    const searchIcon = document.querySelector(DOM.icon);
+    const searchInput = document.querySelector(DOM.input);
+    searchIcon.innerHTML = '<i class="fas fa-search"></i>';
+    searchInput.addEventListener('input', ()=>{
+        if(searchInput.value !== ' ' && searchInput.value.length > 0){
+            //Convert search icon to close anad attach event listener to cancel search and input fields
+            searchIcon.innerHTML = '<i class="fas fa-times"></i>';
+            searchIcon.addEventListener('click', ()=>{
+                endCurrentSearch();
+            });
+
+            //Convert search string to lowercase and create new search object
+            const searchString = searchInput.value.toLowerCase();
+            state.search = new Search(searchString);
+    
+            // Make search
+            state.searchResult = state.search.getSearchResults(state.products);
+    
+            // Display search results
+            showSearchResults(state.searchResult);
+        }else{
+            // Stop search and hide search results
+            endCurrentSearch();
+        }
+    });
+}
+
+//SHOP CONTROLLER
+state.shoppingList = new Shop();
+window.cart = state.shoppingList.items;
+window.sum = state.shoppingList.sum;
+window.products = state.products;
+let productToAdd, productToRemove, productToUpdate;
+
+/* Save cart items in local storage */
+const updateCartToStorage = ()=>{
+    localStorage.setItem('cart', JSON.stringify(state.shoppingList.items));
+    localStorage.setItem('cartTotal', JSON.stringify(state.shoppingList.items.length));
+}
+
+/* Update cart count */
+const cartCountTotal = ()=>{
+    document.querySelector(DOM["dashboard__cart-number"]).textContent = state.shoppingList.items.length;
+}
+
+/* Add items to cart in dashboard */
+const addToCart = ()=>{
+    document.querySelector(DOM.dashboard).addEventListener('click', (e)=>{
+        /* Add to shopping list */
+        if(e.target.className === 'icon-ecommerce-bag'){
+            e.preventDefault();
+            const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
+            productToAdd = state.shoppingList.addItems(productID, state.products);
+
+             /* Calculate total & display in UI */
+            addToCartUI(productToAdd, state.shoppingList.sum);
+            
+        }else if(e.target.className === 'fal fa-plus-circle'){
+            const productID = e.target.parentNode.parentNode.parentNode.id.toString();
+            productToAdd = state.shoppingList.addItems(productID, state.products);
+
+             /* Calculate total & dsiplay in UI */
+            addToCartUI(productToAdd, state.shoppingList.sum);  
+        }
+
+        updateCartToStorage();
+        cartCountTotal();
+    });
+}
+
+/* Add items to cart in product popup */
+const addToCartInPopup = ()=>{
+    document.querySelector(DOM["product-popup-btn"]).addEventListener('click', (e)=>{
+        e.preventDefault();
+
+        /* Retrieve productID from generated url and add to shopping list */
+        const productAddress = window.location.href;
+        const productID = productAddress.slice((productAddress.length-4), productAddress.length);
+
+        productToAdd = state.shoppingList.addItems(productID, state.products);
+
+        /* Calculate total & display in UI */
+        addToCartUI(productToAdd, state.shoppingList.sum);
+
+        updateCartToStorage();
+
+        /* Close popup */
+        closeP();
+
+        cartCountTotal();
+    });
+}
+
+/* Remove items from cart */
+const removeFromCart = ()=>{
+    document.querySelector(DOM.dashboard).addEventListener('click', (e)=>{
+        /* Remove from shopping list */        
+        if(e.target.className === 'fas fa-times'){
+            const productID = e.target.parentNode.parentNode.id.toString(); //ID of item to be removed
+            const productIndex  = e.target.parentNode.parentNode.dataset.index; //Dataset index of item to be removed
+
+            /* Delete from shopping List */
+            productToRemove = state.shoppingList.deleteItems(productID);
+            
+            /* Calculate total & remove from UI */
+            removeFromCartUI(productIndex, state.shoppingList.sum);
+
+            /* If deleted item has count more than 1, reset back to 1 because you've removed it from cart */
+            productToRemove.count = 1;
+        }
+        updateCartToStorage();
+        cartCountTotal();
+    });
+}
+
+/* Update items in cart */
+const updateShoppingList = ()=>{
+    document.querySelector(DOM.dashboard).addEventListener('click', (e)=>{
+        if(e.target.className === 'fal fa-minus-circle'){
+            const productID = e.target.parentNode.parentNode.parentNode.id.toString();
+            const productIndex  = e.target.parentNode.parentNode.parentNode.dataset.index; //Dataset index of item to be altered
+            console.log(productID, productIndex);
+            
+            /* Reduce count of item in shopping cart if more than 1, otherwise delete from cart */
+            productToUpdate = state.shoppingList.updateItem(productID);
+            updateItemInCartUI(productToUpdate, state.shoppingList.sum);
+            // updateItemInCartUI(productIndex, productToRemove, state.shoppingList.sum);
+            updateCartToStorage();
+            cartCountTotal();
+
+            /* If deleted item has count as 0, reset back to 1 */
+            state.shoppingList.restoreCount(state.products);
+        }
+    });
+}
+
+//LIKES CONTROLLER
+let likeStatus, likedProducts ;
+state.likedProducts = new Like;
+
+/* Fetch likes from localstorage or server and overwrite empty likes array */
+state.likedProducts.fetchLikes();
+
+/* Exposing state likes to console */
+window.likes = state.likedProducts.likes;
+
+
+/* Add products to likes */
+const likeProduct = ()=>{
+
+    /* Add productID to likes array */
+    document.querySelector(DOM.dashboard).addEventListener('click', (e)=>{
+        if(e.target.className === 'icon-basic-heart'){
+            e.preventDefault();
+            const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
+            likeStatus = state.likedProducts.setLike(productID, state.products);
+            
+            /* Display alert if product is liked or not */
+            isProductLiked(likeStatus, productID, likedProducts);
+
+            /* Update likes in local storage */
+            localStorage.setItem('likedProducts', JSON.stringify(state.likedProducts.likes));
+        }
+    });
+}
+
+/* Event listener to know we are on the favorites page and thus fetch for orders */
+window.addEventListener('load', ()=>{
+    let productAddress = location.href;
+    if(productAddress.slice(22, 31) === 'favorites'){
+        // /* Show loader when products are still loading */
+        // showLoader();
+
+        /* Show liked products on favorites page UI */
+        showLikesOnUI(JSON.parse(localStorage.getItem('likedProducts')));
+
+        /* Event listener to track which product to remove from likedProducts state */
+        document.querySelector('body').addEventListener('click', (e)=>{
+            if(e.target.className === 'general__main--content--favorites--card--delete'){
+                e.preventDefault();
+                /* Retrieve id of liked product */
+                let likeID = e.target.parentNode.id.toString();
+                
+                /* Pass the id to remove method and from state likes */
+                let likeToRemove = state.likedProducts.removeLike(likeID);
+                console.log(state.likedProducts.likes);
+                
+                /* Update likes in local storage */
+                localStorage.setItem('likedProducts', JSON.stringify(state.likedProducts.likes));
+                
+                /* Render new list to UI */
+                deleteLikeOnUI(likeToRemove);
+            }
+
+        });
+    }
+});
+
+//ORDERS CONTROLLER
+window.addEventListener('load', ()=>{
+    let productAddress = location.href;
+    if(productAddress.slice(22, 28) === 'orders'){
+        console.log('In the orders page, biish');
+    }
+});
+
+//NOTE: Should be left as last controller
+//HOME CONTROLLER - (To control product preview, adding to cart and favorites)
+document.querySelector('.market').addEventListener('click', (e) => {
+    /* Setting up product popup for homepage */
+    if(e.target.className === 'icon-basic-magnifier'){
+        e.preventDefault();
+        const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
+        window.open(`http://127.0.0.1:8080/dashboard.html?${productID}`, '_blank');
+
+    }else if(e.target.className === 'icon-ecommerce-bag'){
+        e.preventDefault();
+        const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();        
+        window.open(`http://127.0.0.1:8080/dashboard.html?add-${productID}`, '_blank');
+    }
+});
+
+
