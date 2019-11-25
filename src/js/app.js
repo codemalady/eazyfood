@@ -57,18 +57,18 @@ state.products = new Array();
 window.addEventListener('load', async ()=>{
     try {
         let fetchedProducts = await fetchProducts();
-        // console.log('Products still loading');
-        showLoader();
+        showLoader(); 
+        /* If products are available, transfer into state */
         if(fetchedProducts){
-            // console.log('Products loaded');
             hideLoader();
-            for (const product of fetchedProducts.products) {
+            for (const product of fetchedProducts) {
                 const newProduct = new Product(product.productId, product.name.toLowerCase(), product.imageUrl, product.price, product.moq, product.categories)
                 state.products.push(newProduct);
             }
         }
     } catch (error) {
-        showLoader();
+        // Create or display error message
+        console.log('An error occured');
     }
 
     init();
