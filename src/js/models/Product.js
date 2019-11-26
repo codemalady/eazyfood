@@ -19,7 +19,6 @@ export const fetchProducts = async() => {
         let data = await fetch('https://eazy-food.firebaseio.com/products.json');
         let res = await data.json();
         return res;
-        console.log(res);
     }catch(e){
         console.log(e);
     }

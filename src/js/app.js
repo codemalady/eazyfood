@@ -57,7 +57,7 @@ state.products = new Array();
 window.addEventListener('load', async ()=>{
     try {
         let fetchedProducts = await fetchProducts();
-        showLoader(); 
+        showLoader();
         /* If products are available, transfer into state */
         if(fetchedProducts){
             hideLoader();
@@ -352,6 +352,8 @@ window.addEventListener('load', ()=>{
 });
 
 //AUTH CONTROLLER
+state.user;
+window.user = state.user;
 /* Start Firebase services */
 document.addEventListener('DOMContentLoaded', ()=>{
     console.log('Site loading');
@@ -371,14 +373,22 @@ document.querySelector('body').addEventListener('click', (e)=>{
 document.querySelector('.market').addEventListener('click', (e) => {
     /* Setting up product popup for homepage */
     if(e.target.className === 'icon-basic-magnifier'){
-        e.preventDefault();
-        const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
-        window.open(`http://127.0.0.1:8080/dashboard.html?${productID}`, '_blank');
+        if(state.user !== undefined){
+            e.preventDefault();
+            const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
+            window.open(`http://127.0.0.1:8080/dashboard.html?${productID}`, '_blank');
+        }else{
+            console.log('Login first');
+        }
 
     }else if(e.target.className === 'icon-ecommerce-bag'){
-        e.preventDefault();
-        const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();        
-        window.open(`http://127.0.0.1:8080/dashboard.html?add-${productID}`, '_blank');
+        if(state.user !== undefined){
+            e.preventDefault();
+            const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();        
+            window.open(`http://127.0.0.1:8080/dashboard.html?add-${productID}`, '_blank');
+        }else{
+            console.log('Login first');
+        }
     }
 });
 

@@ -13,31 +13,26 @@
     <link rel="stylesheet" href="./css/index.css">
     <title>EazyFood</title>
 </head>
-<body class>
-    <div class="product-detail">
-        <span class="product-detail__close">
-            <span class="product-detail__close--icon">👈</span>
-        </span>
-        <div class="product-detail__card">
-            <div class="product-detail__card--left">
-                <div class="product-detail__card--left--content">
-                    <h4 class="product-detail__card--left--content--name"></h4>
-                    <p class="product-detail__card--left--content--price u-mb-small">12</p>
-                    <a href="#" class="product-detail__card--left--content--btn u-mb-small">Add to cart</a>
-                    <br/>
-                    <p class="product-detail__card--left--content--title">Description</p>
-                    <p class="product-detail__card--left--content--description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis nemo ullam suscipit optio beatae quae modi veritatis officia. Suscipit unde libero eius possimus temporibus officia iusto illum aperiam laboriosam ducimus!
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis nemo ullam suscipit optio beatae quae modi veritatis officia. Suscipit unde libero eius possimus temporibus officia iusto illum aperiam laboriosam ducimus!
-                    </p>
-                    <div class="u-mb-small"></div>
-                    <p class="product-detail__card--left--content--title">moq</p>
-                    <p class="product-detail__card--left--content--moq"></p>
+<body>
+    <div class="auth">
+        <div class="auth__close">
+            <span class="auth__close--icon">
+                <i class="fad fa-times"></i>
+            </span>
+        </div>
+        <div class="auth__popup">
+            <div class="auth__popup--logo u-mb-small">logo</div>
+            <form class="auth__form">
+                <div class="auth__form--group">
+                    <input type="text" class="auth__form--input" id="email" placeholder="email address" autocomplete="off">
+                    <label for="email" class="auth__form--label">email address</label>
                 </div>
-            </div>
-            <div class="product-detail__card--right">
-                <div class="product-detail__card--right--img"></div>
-            </div>
+                <div class="auth__form--group">
+                    <input type="password" class="auth__form--input" id="email" placeholder="password">
+                    <label for="password" class="auth__form--label">password</label>
+                </div>
+                <a href="#" class="auth__form--btn">sign in</a>
+            </form>
         </div>
     </div>
     <header class="header">
@@ -50,7 +45,11 @@
                 <li><a href="#" class="header__menu--item">frozen food</a></li>
                 <li><a href="#" class="header__menu--item">grocery</a></li>
                 <li><a href="#" class="header__menu--item">oils & sauces</a></li>
-                <li><span class="header__menu--icon"><i class="fad fa-user-circle"></i></span></li>
+                <li>
+                    <span class="header__menu--icon">
+                        <i class="fad fa-user-circle"></i>
+                    </span>
+                </li>
             </ul>
         </div>
         <div class="header__content">

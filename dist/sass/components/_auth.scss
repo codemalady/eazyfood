@@ -1,0 +1,110 @@
+.auth{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(black, .8);
+
+    &__popup{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 2.5rem 1.5rem;
+        border-radius: .3rem;
+        box-shadow: 0 .1rem 1rem rgba($color-primary, .8);
+        z-index: 300;
+        cursor: pointer;
+
+        &--logo{
+            text-align: center;
+            font-size: 4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+    }
+
+    &__close{
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        height: 5rem;
+        width: 5rem;
+        border-radius: 50%;
+        background-color: white;
+        box-shadow: 0 .1rem 1rem rgba($color-primary, .8);
+        cursor: pointer;
+
+        &--icon{
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+        }
+    }
+
+    &__form{
+        &--group{
+            margin-bottom: .25rem;
+        }
+
+        &--input{
+            width: 30rem;
+            padding: 1.5rem 1.5rem;
+            border-radius: .5rem;
+            border: .1rem solid #CCCCCC;
+            font-family: 'Manjari', sans-serif;
+            font-size: 1.5rem;
+
+            &::-webkit-input-placeholder{
+                text-transform: capitalize;
+            }
+
+            &:focus{
+                outline: none;
+                border: .1rem solid $color-primary-dark;
+
+                &::-webkit-input-placeholder{
+                    color: transparent;
+                }
+            }
+        }
+
+        &--input:focus + &--label{
+            transform: translate(.5rem, 0);
+            opacity: 1;
+        }            
+
+
+        &--label{
+            display: block;
+            margin-top: .25rem;
+            font-size: 1.2rem;
+            text-transform: capitalize;
+            color: black;
+            transform: translate(.5rem, -1.5rem);
+            opacity: 0;
+            transition: all .3s ease;
+        }
+
+        &--btn{
+            color: white;
+
+            &:active, &:link{
+                display: inline-block;
+                width: 30rem;
+                background-color: black;
+                padding: 1.5rem;
+                text-align: center;
+                border-radius: .3rem;
+                text-decoration: none;
+                font-size: 1.5rem;
+                text-transform: capitalize;
+            }
+        }
+    }
+}

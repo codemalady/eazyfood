@@ -1,10 +1,12 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import {} from 'dotenv/config';
+
 
 let signedInUser, signedUpUser;
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCzfjODpJynTbsMD0gcq9d0ikr3g9doyFo",
+    apiKey: process.env.API_KEY,
     authDomain: "eazy-food.firebaseapp.com",
     databaseURL: "https://eazy-food.firebaseio.com",
     projectId: "eazy-food",

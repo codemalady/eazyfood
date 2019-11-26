@@ -28,7 +28,8 @@ html {
     box-sizing: inherit; }
 
 body {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  position: relative; }
 
 body {
   font-family: 'Manjari', sans-serif;
@@ -87,6 +88,87 @@ body {
       top: 50%;
       transform: translateY(-50%);
       text-decoration: none; }
+
+.auth {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8); }
+  .auth__popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 2.5rem 1.5rem;
+    border-radius: .3rem;
+    box-shadow: 0 0.1rem 1rem rgba(252, 214, 97, 0.8);
+    z-index: 300;
+    cursor: pointer; }
+    .auth__popup--logo {
+      text-align: center;
+      font-size: 4rem;
+      font-weight: 700;
+      text-transform: uppercase; }
+  .auth__close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 0.1rem 1rem rgba(252, 214, 97, 0.8);
+    cursor: pointer; }
+    .auth__close--icon {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem; }
+  .auth__form--group {
+    margin-bottom: .25rem; }
+  .auth__form--input {
+    width: 30rem;
+    padding: 1.5rem 1.5rem;
+    border-radius: .5rem;
+    border: .1rem solid #CCCCCC;
+    font-family: 'Manjari', sans-serif;
+    font-size: 1.5rem; }
+    .auth__form--input::-webkit-input-placeholder {
+      text-transform: capitalize; }
+    .auth__form--input:focus {
+      outline: none;
+      border: 0.1rem solid #dca704; }
+      .auth__form--input:focus::-webkit-input-placeholder {
+        color: transparent; }
+  .auth__form--input:focus + .auth__form--label {
+    transform: translate(0.5rem, 0);
+    opacity: 1; }
+  .auth__form--label {
+    display: block;
+    margin-top: .25rem;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    color: black;
+    transform: translate(0.5rem, -1.5rem);
+    opacity: 0;
+    transition: all .3s ease; }
+  .auth__form--btn {
+    color: white; }
+    .auth__form--btn:active, .auth__form--btn:link {
+      display: inline-block;
+      width: 30rem;
+      background-color: black;
+      padding: 1.5rem;
+      text-align: center;
+      border-radius: .3rem;
+      text-decoration: none;
+      font-size: 1.5rem;
+      text-transform: capitalize; }
 
 .food-capsule {
   height: 10rem;
