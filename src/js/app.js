@@ -8,7 +8,8 @@ import { Shop } from './models/Shop';
 import { showCart, addToCartUI, removeFromCartUI, updateItemInCartUI } from './views/shopView';
 import { Like } from './models/Like';
 import { isProductLiked, showLikesOnUI, deleteLikeOnUI } from './views/likesView';
-import { startFirebase, signUp} from './models/Auth';
+import { startFirebase, signIn, signUp} from './models/Auth';
+import { initializeAuth, toggleAuthModes, showAuthPopup, closeAuthPopup, retrieveUserData } from './views/authView';
 
 /* App initial state and all neccessary event listeners to be setup in the dashboard */
 const init = ()=>{
@@ -354,41 +355,73 @@ window.addEventListener('load', ()=>{
 //AUTH CONTROLLER
 state.user;
 window.user = state.user;
-/* Start Firebase services */
+
+/* Start Firebase services and initial auth mode (sign up/ sign in) */
 document.addEventListener('DOMContentLoaded', ()=>{
     console.log('Site loading');
     startFirebase();
+    initializeAuth();
+    /* Switch auth modes if necessary */
+    toggleAuthModes();
 });
 
-/* Open signUp / signIn pop up */
+/* Open and close auth popup */
 document.querySelector('body').addEventListener('click', (e)=>{
     if(e.target.parentNode.className === 'header__menu--icon'){
-        console.log('Tried to login');
-        signUp();
+        if(state.user === undefined){
+            showAuthPopup();
+        }else{
+            window.open(`http://127.0.0.1:8080/dashboard.html`);
+        }
+    }else if(e.target.closest('.auth__close')){
+        closeAuthPopup();
     }
 });
+
+/* Collect data from UI and pass to Firebase to authenticate */
+document.querySelector('body').addEventListener('click', async (e)=>{
+    if(e.target.className === 'auth__form--btn'){
+        let userDetails = retrieveUserData();
+        console.log(userDetails);
+
+        /* Pass data to appropriate function */
+        if (!document.getElementById(DOM["auth-switch"]).checked) {
+            try {
+                state.user = await signIn(userDetails.email, userDetails.password); 
+            } catch (e) {
+                console.log(e);
+            }          
+        } else {
+            try {
+                state.user = await signUp(userDetails.email, userDetails.password, userDetails.display);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+});
+
 
 //NOTE: Should be left as last controller
 //HOME CONTROLLER - (To control product preview, adding to cart and favorites)
 document.querySelector('.market').addEventListener('click', (e) => {
     /* Setting up product popup for homepage */
     if(e.target.className === 'icon-basic-magnifier'){
-        if(state.user !== undefined){
-            e.preventDefault();
-            const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
-            window.open(`http://127.0.0.1:8080/dashboard.html?${productID}`, '_blank');
-        }else{
-            console.log('Login first');
-        }
+        e.preventDefault();
+        const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
+        window.open(`http://127.0.0.1:8080/dashboard.html?${productID}`, '_blank');
 
     }else if(e.target.className === 'icon-ecommerce-bag'){
-        if(state.user !== undefined){
-            e.preventDefault();
-            const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();        
-            window.open(`http://127.0.0.1:8080/dashboard.html?add-${productID}`, '_blank');
-        }else{
-            console.log('Login first');
-        }
+        e.preventDefault();
+        const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();        
+        window.open(`http://127.0.0.1:8080/dashboard.html?add-${productID}`, '_blank');
+        // if(state.user !== undefined){
+        //     e.preventDefault();
+        //     const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();        
+        //     window.open(`http://127.0.0.1:8080/dashboard.html?add-${productID}`, '_blank');
+        // }else{
+        //     showAuthPopup();
+        // }
     }
 });
 

@@ -22,5 +22,10 @@ export const DOM = {
     'alert-box': '.alert',
     'alert-content' : '.alert__text',
     'favorites-list' : '.general__main--content--favorites--cards',
-    'favorites' : '.general__main--content--favorites--card'
+    'favorites' : '.general__main--content--favorites--card',
+    'auth' : '.auth',
+    'auth-popup': '.auth__popup',
+    'auth-switch' : 'auth-toggle', //Passing the id not the class name
+    'auth-label': '.auth__form--toggle',
+    'auth-content' : '.auth__form'
 }

@@ -6,18 +6,22 @@
     width: 100%;
     height: 100vh;
     background-color: rgba(black, .8);
+    opacity: 0;
+    visibility: hidden;
+    transition: all .2s ease;
 
     &__popup{
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: scale(.8) translate(-50%, -50%);
         background-color: white;
         padding: 2.5rem 1.5rem;
         border-radius: .3rem;
         box-shadow: 0 .1rem 1rem rgba($color-primary, .8);
         z-index: 300;
         cursor: pointer;
+        transition: all .2s ease;
 
         &--logo{
             text-align: center;
@@ -104,7 +108,39 @@
                 text-decoration: none;
                 font-size: 1.5rem;
                 text-transform: capitalize;
+                position: relative;
             }
+
+            .loader{
+                height: 2rem;
+                width: 2rem;
+                border: .1rem solid $color-primary-light;
+                border-left: .1rem solid $color-primary-dark;
+                border-radius: 50%;
+                animation: rotate 1s linear infinite;
+                position: absolute;
+                top: 20%;
+                left: 45%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        &--checkbox{
+            display: none;
+        }
+
+        &--toggle{
+            display: block;
+            margin-top: .75rem;
+            color: $color-primary-dark;
+            text-align: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        &--description{
+            text-decoration: none;
+            color: black;
         }
     }
 }

@@ -5,3 +5,11 @@
         clear: both;
     }
 }
+
+@mixin respond($device) {
+    @if $device == phone {
+        @media (max-width: 600px){
+            @content;
+        }
+    }
+}
