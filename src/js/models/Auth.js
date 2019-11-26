@@ -1,12 +1,12 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import {} from 'dotenv/config';
+import { config } from '../../../config';
 
 
 let signedInUser, signedUpUser;
 
 const firebaseConfig = {
-    apiKey: process.env.API_KEY,
+    apiKey: config.apiKey,
     authDomain: "eazy-food.firebaseapp.com",
     databaseURL: "https://eazy-food.firebaseio.com",
     projectId: "eazy-food",
@@ -20,7 +20,7 @@ export const startFirebase = ()=>{
     firebase.initializeApp(firebaseConfig);
 }
 
-export const signUp = async(email, password)=>{
+export const signUp = async(email, password)=>{    
     try{
         signedUpUser = await firebase.auth().createUserWithEmailAndPassword('ode@gef.com', '123456');
         console.log(signedUpUser);

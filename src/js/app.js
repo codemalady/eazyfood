@@ -379,24 +379,16 @@ document.querySelector('body').addEventListener('click', (e)=>{
 });
 
 /* Collect data from UI and pass to Firebase to authenticate */
-document.querySelector('body').addEventListener('click', async (e)=>{
+document.querySelector('body').addEventListener('click', (e)=>{
     if(e.target.className === 'auth__form--btn'){
         let userDetails = retrieveUserData();
         console.log(userDetails);
 
         /* Pass data to appropriate function */
         if (!document.getElementById(DOM["auth-switch"]).checked) {
-            try {
-                state.user = await signIn(userDetails.email, userDetails.password); 
-            } catch (e) {
-                console.log(e);
-            }          
+            state.user = signIn(userDetails.email, userDetails.password);      
         } else {
-            try {
-                state.user = await signUp(userDetails.email, userDetails.password, userDetails.display);
-            } catch (e) {
-                console.log(e);
-            }
+            state.user = signUp(userDetails.email, userDetails.password, userDetails.display);
         }
     }
 });
