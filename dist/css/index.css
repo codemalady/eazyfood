@@ -149,6 +149,8 @@ body {
       border: 0.1rem solid #dca704; }
       .auth__form--input:focus::-webkit-input-placeholder {
         color: transparent; }
+      .auth__form--input:focus:invalid {
+        border: .1rem solid red; }
   .auth__form--input:focus + .auth__form--label {
     transform: translate(0.5rem, 0);
     opacity: 1; }

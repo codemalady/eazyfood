@@ -1,4 +1,6 @@
 //GLOBAL APP CONTROLLER
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import { DOM } from './base';
 import {Product, fetchProducts} from './models/Product';
 import { showProducts, viewProduct as viewP, closeProduct as closeP, showLoader, hideLoader } from './views/productView';
@@ -8,29 +10,39 @@ import { Shop } from './models/Shop';
 import { showCart, addToCartUI, removeFromCartUI, updateItemInCartUI } from './views/shopView';
 import { Like } from './models/Like';
 import { isProductLiked, showLikesOnUI, deleteLikeOnUI } from './views/likesView';
-import { startFirebase, signIn, signUp} from './models/Auth';
-import { initializeAuth, toggleAuthModes, showAuthPopup, closeAuthPopup, retrieveUserData } from './views/authView';
-
-/* App initial state and all neccessary event listeners to be setup in the dashboard */
-const init = ()=>{
-    setupMenuEventListener();
-    searchListener();
-    toggleProductCategories();
-    showProducts(state.selected, state.products);
-    viewProduct();
-    closeProduct();
-    browserCloseProduct();
-    showCart(state.shoppingList.items, state.shoppingList.sum);
-    addToCart();
-    addToCartInPopup();
-    removeFromCart();
-    updateShoppingList();
-    likeProduct();
-};
+import { User } from './models/Auth';
+import { initializeAuth, toggleAuthModes, showAuthPopup, closeAuthPopup, retrieveUserData, authLoading, authDone, showCurrentUser} from './views/authView';
 
 /* Global App State */
 const state = {};
-// window.state = state;
+
+//HOME CONTROLLER - (To control product preview, adding to cart and favorites)
+window.addEventListener('load', ()=>{
+    marketEventListener();
+});
+
+const marketEventListener = ()=>{
+    document.querySelector('.market').addEventListener('click', (e) => {
+        /* Setting up product popup for homepage */
+        if(e.target.className === 'icon-basic-magnifier'){
+            e.preventDefault();
+            const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
+            window.open(`http://127.0.0.1:8080/dashboard.html?${productID}`, '_blank');
+
+        }else if(e.target.className === 'icon-ecommerce-bag'){
+            e.preventDefault();
+            const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();        
+            window.open(`http://127.0.0.1:8080/dashboard.html?add-${productID}`, '_blank');
+            // if(state.user !== undefined){
+            //     e.preventDefault();
+            //     const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();        
+            //     window.open(`http://127.0.0.1:8080/dashboard.html?add-${productID}`, '_blank');
+            // }else{
+            //     showAuthPopup();
+            // }
+        }
+    });
+}
 
 //TOGGlE DASHBOARD MENU
 /* Function to toggle the menus if menu input label is checked */
@@ -46,13 +58,92 @@ const toggleMenu = ()=>{
     }
 }
 /* Event listener to be added to the menu button at initialization of webapp */
-const setupMenuEventListener = ()=>{
+const setupMenuEventListener = (pageClass)=>{
+    /* Some buttons to be hidden when user isnt logged in */
+    if(localStorage.getItem('username') === null){
+        document.querySelector(pageClass).innerHTML = `
+            <li><a href="/" class="dashboard__menu__btns--btn">
+                <span class="dashboard__menu__btns--btn--icon">
+                    <i class="fad fa-home"></i>
+                </span>
+                <span class="dashboard__menu__btns--btn--tooltip">Home</span>
+            </a></li>
+            <li><a href="/favorites.html" class="dashboard__menu__btns--btn">
+                <span class="dashboard__menu__btns--btn--icon">
+                    <i class="fad fa-heart"></i>
+                </span>
+                <span class="dashboard__menu__btns--btn--tooltip">Favorites</span>
+            </a></li>
+            <li><a href="#" class="dashboard__menu__btns--btn">
+                <span class="dashboard__menu__btns--btn--icon">
+                    <i class="fad fa-envelope-open"></i>
+                </span>
+                <span class="dashboard__menu__btns--btn--tooltip">Contact</span>
+            </a></li>
+        `;
+    }else{
+        document.querySelector(pageClass).innerHTML = `
+            <li><a href="/" class="dashboard__menu__btns--btn">
+                <span class="dashboard__menu__btns--btn--icon">
+                    <i class="fad fa-home"></i>
+                </span>
+                <span class="dashboard__menu__btns--btn--tooltip">Home</span>
+            </a></li>
+            <li><a href="/favorites.html" class="dashboard__menu__btns--btn">
+                <span class="dashboard__menu__btns--btn--icon">
+                    <i class="fad fa-heart"></i>
+                </span>
+                <span class="dashboard__menu__btns--btn--tooltip">Favorites</span>
+            </a></li>
+            <li><a href="/orders.html" id="orders" class="dashboard__menu__btns--btn">
+                <span class="dashboard__menu__btns--btn--icon">
+                    <i class="fad fa-box"></i>
+                </span>
+                <span class="dashboard__menu__btns--btn--tooltip">Orders</span>
+            </a></li>
+            <li><a href="#" class="dashboard__menu__btns--btn">
+                <span class="dashboard__menu__btns--btn--icon">
+                    <i class="fad fa-cog"></i>
+                </span>
+                <span class="dashboard__menu__btns--btn--tooltip">Settings</span>
+            </a></li>
+            <li><a href="#" class="dashboard__menu__btns--btn">
+                <span class="dashboard__menu__btns--btn--icon">
+                    <i class="fad fa-envelope-open"></i>
+                </span>
+                <span class="dashboard__menu__btns--btn--tooltip">Contact</span>
+            </a></li>
+            <li><a href="#" id="sign-out" class="dashboard__menu__btns--btn">
+                <span class="dashboard__menu__btns--btn--icon">
+                    <i class="fad fa-sign-out-alt"></i>
+                </span>
+                <span class="dashboard__menu__btns--btn--tooltip">Logout</span>
+            </a></li>
+        `;
+    }
     document.querySelector(DOM["dashboard-menu-toggle"]).checked = false;
     document.querySelector(DOM["dashboard-menu-toggle"]).addEventListener('click', toggleMenu);
 }
 
 
 //PRODUCT CONTROLLER
+/* App initial state and all neccessary event listeners to be setup in the dashboard */
+const init = ()=>{
+    showProducts(state.selected, state.products);
+    toggleProductCategories();
+    setupMenuEventListener(DOM["dashboard-nav"]);
+    searchListener();
+    viewProduct();
+    closeProduct();
+    browserCloseProduct();
+    showCart(state.shoppingList.items, state.shoppingList.sum);
+    addToCart();
+    addToCartInPopup();
+    removeFromCart();
+    updateShoppingList();
+    likeProduct();
+};
+
 /* Fetch products and assign them to the Product class */
 state.products = new Array();
 window.addEventListener('load', async ()=>{
@@ -91,8 +182,12 @@ window.addEventListener('load', async ()=>{
         /* Calculate total & display in UI */
         addToCartUI(productToAdd, state.shoppingList.sum);
     }
-});
 
+    /* Change dashboard username */
+    state.user.fetchCurrentUser();
+    showCurrentUser();
+
+});
 
 /* Arrange and sort products by categories */
 state.selected = 'fruits';
@@ -316,11 +411,11 @@ const likeProduct = ()=>{
 window.addEventListener('load', ()=>{
     let productAddress = location.href;
     if(productAddress.slice(22, 31) === 'favorites'){
-        // /* Show loader when products are still loading */
-        // showLoader();
-
         /* Show liked products on favorites page UI */
         showLikesOnUI(JSON.parse(localStorage.getItem('likedProducts')));
+
+        /* Some buttons to be hidden when user isnt logged in */
+        setupMenuEventListener(DOM["general-nav"]);
 
         /* Event listener to track which product to remove from likedProducts state */
         document.querySelector('body').addEventListener('click', (e)=>{
@@ -353,22 +448,23 @@ window.addEventListener('load', ()=>{
 });
 
 //AUTH CONTROLLER
-state.user;
-window.user = state.user;
+state.user = new User();
+state.user.init();
 
 /* Start Firebase services and initial auth mode (sign up/ sign in) */
-document.addEventListener('DOMContentLoaded', ()=>{
-    console.log('Site loading');
-    startFirebase();
-    initializeAuth();
-    /* Switch auth modes if necessary */
+document.addEventListener('DOMContentLoaded', async()=>{
+    /* Switch auth modes between sign in/ sign up if necessary */
     toggleAuthModes();
+    /* Switch initial auth form to sign in mode */
+    initializeAuth();
+    /* Fetch current user */
+    state.user.fetchCurrentUser();
 });
 
 /* Open and close auth popup */
 document.querySelector('body').addEventListener('click', (e)=>{
     if(e.target.parentNode.className === 'header__menu--icon'){
-        if(state.user === undefined){
+        if(localStorage.getItem('username') === null){
             showAuthPopup();
         }else{
             window.open(`http://127.0.0.1:8080/dashboard.html`);
@@ -379,42 +475,39 @@ document.querySelector('body').addEventListener('click', (e)=>{
 });
 
 /* Collect data from UI and pass to Firebase to authenticate */
-document.querySelector('body').addEventListener('click', (e)=>{
-    if(e.target.className === 'auth__form--btn'){
-        let userDetails = retrieveUserData();
-        console.log(userDetails);
-
+document.querySelector('body').addEventListener('click', async (e)=>{
+    let userDetails;
+    if(e.target.closest('.auth__form--btn')){ 
         /* Pass data to appropriate function */
         if (!document.getElementById(DOM["auth-switch"]).checked) {
-            state.user = signIn(userDetails.email, userDetails.password);      
+            authLoading();
+            userDetails = retrieveUserData();
+            await state.user.signIn(userDetails.email, userDetails.password);
+            if(localStorage.getItem('username') !== null){
+                authDone();
+                window.open(`http://127.0.0.1:8080/dashboard.html`, '_self'); 
+            }      
         } else {
-            state.user = signUp(userDetails.email, userDetails.password, userDetails.display);
+            authLoading();
+            userDetails = retrieveUserData();
+            await state.user.signUp(userDetails.email, userDetails.password, userDetails.display);
+            if(localStorage.getItem('username') !== null){
+                /* While signing up, wait for 2 secs before assigning user details wth updated username to user state */
+                setTimeout(()=>{
+                    state.user = state.user;
+                    authDone();
+                    window.open(`http://127.0.0.1:8080/dashboard.html`, '_self');
+                }, 2000);
+            }
         }
     }
 });
 
-
-//NOTE: Should be left as last controller
-//HOME CONTROLLER - (To control product preview, adding to cart and favorites)
-document.querySelector('.market').addEventListener('click', (e) => {
-    /* Setting up product popup for homepage */
-    if(e.target.className === 'icon-basic-magnifier'){
-        e.preventDefault();
-        const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
-        window.open(`http://127.0.0.1:8080/dashboard.html?${productID}`, '_blank');
-
-    }else if(e.target.className === 'icon-ecommerce-bag'){
-        e.preventDefault();
-        const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();        
-        window.open(`http://127.0.0.1:8080/dashboard.html?add-${productID}`, '_blank');
-        // if(state.user !== undefined){
-        //     e.preventDefault();
-        //     const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();        
-        //     window.open(`http://127.0.0.1:8080/dashboard.html?add-${productID}`, '_blank');
-        // }else{
-        //     showAuthPopup();
-        // }
-    }
-});
+/* Sign out from app */
+document.getElementById('sign-out').addEventListener('click', async()=>{
+    console.log('Attempting logout');
+    await state.user.signOut();
+    console.log('User logged out');
+})
 
 

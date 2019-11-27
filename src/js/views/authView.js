@@ -2,7 +2,7 @@ import { DOM } from '../base';
 
 const signInHtml = `
     <div class="auth__form--group">
-        <input type="text" class="auth__form--input" id="email" placeholder="email address" autocomplete="off">
+        <input type="email" class="auth__form--input" id="email" placeholder="email address" autocomplete="off">
         <label for="email" class="auth__form--label">email address</label>
     </div>
     <div class="auth__form--group">
@@ -17,25 +17,23 @@ const signInHtml = `
 
 const signUpHtml = `
     <div class="auth__form--group">
-    <input type="text" class="auth__form--input" id="email" placeholder="email address" autocomplete="off">
-    <label for="email" class="auth__form--label">email address</label>
+        <input type="email" class="auth__form--input" id="email" placeholder="email address" autocomplete="off">
+        <label for="email" class="auth__form--label">email address</label>
     </div>
     <div class="auth__form--group">
-    <input type="text" class="auth__form--input" id="display-name" placeholder="display name" autocomplete="off">
-    <label for="display-name" class="auth__form--label">display name</label>
+        <input type="text" class="auth__form--input" id="display-name" placeholder="display name" autocomplete="off">
+        <label for="display-name" class="auth__form--label">display name</label>
     </div>
     <div class="auth__form--group">
-    <input type="password" class="auth__form--input" id="password" placeholder="password">
-    <label for="password" class="auth__form--label">password</label>
+        <input type="password" class="auth__form--input" id="password" placeholder="password">
+        <label for="password" class="auth__form--label">password</label>
     </div>
     <a href="#" class="auth__form--btn">
-    sign up
-    <!-- <div class="loader"></div> -->
+        sign up
     </a>
 `;
 
 export const initializeAuth = ()=>{
-    // document.getElementById(DOM["auth-switch"]).checked = false;
     document.querySelector(DOM["auth-content"]).innerHTML = signInHtml;
     document.querySelector(DOM["auth-label"]).innerHTML = `
         <span class="auth__form--description">Don't have an account?</span>&nbsp;
@@ -86,4 +84,59 @@ export const retrieveUserData = ()=>{
             display: displayNameValue
         };
     }
+}
+
+export const authLoading = ()=>{
+    document.querySelector(DOM["auth-btn"]).innerHTML = `<div class="loader"></div>`;
+}
+
+export const authDone = ()=>{
+    document.querySelector(DOM["auth-btn"]).innerHTML = `<p>sign up</p>`;
+}
+
+export const showError = (err)=>{
+    console.log(err);
+    let labels = Array.from(document.querySelectorAll('label'));
+    if(err === 'auth/invalid-email'){
+        for (const label of labels) {
+            if(label.htmlFor === 'email'){
+                document.getElementById('email').style.border = '.1rem solid red';
+                document.getElementById('email').focus();
+                label.style.color = 'red'
+                label.textContent = 'Invalid email';
+            }
+        }
+    }else if(err === 'auth/weak-password'){
+        for (const label of labels) {
+            if(label.htmlFor === 'password'){
+                document.getElementById('password').style.border = '.1rem solid red';
+                document.getElementById('password').focus();
+                label.style.color = 'red'
+                label.textContent = 'Password not up to 6 characters';
+            }
+        }
+    }else if(err === 'auth/user-not-found'){
+        for (const label of labels) {
+            if(label.htmlFor === 'email'){
+                document.getElementById('email').style.border = '.1rem solid red';
+                document.getElementById('email').focus();
+                label.style.color = 'red'
+                label.textContent = 'User not found';
+            }
+        }
+    }else if(err = 'auth/wrong-password'){
+        for (const label of labels) {
+            if(label.htmlFor === 'password'){
+                document.getElementById('password').style.border = '.1rem solid red';
+                document.getElementById('password').focus();
+                label.style.color = 'red'
+                label.textContent = 'Incorrect password';
+            }
+        }
+    }
+
+}
+
+export const showCurrentUser = ()=>{
+    document.querySelector(DOM["current-user"]).textContent = (localStorage.getItem('username') !== null) ? `Hello, ${localStorage.getItem('username')} 👋` : `Hello, Guest 🙂`;
 }

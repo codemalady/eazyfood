@@ -75,6 +75,10 @@
                 &::-webkit-input-placeholder{
                     color: transparent;
                 }
+
+                &:invalid{
+                    border: .1rem solid red;
+                }
             }
         }
 

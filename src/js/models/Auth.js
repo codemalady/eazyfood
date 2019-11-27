@@ -1,40 +1,73 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { config } from '../../../config';
+import { authDone, showError } from '../views/authView'
 
-
-let signedInUser, signedUpUser;
-
-const firebaseConfig = {
-    apiKey: config.apiKey,
-    authDomain: "eazy-food.firebaseapp.com",
-    databaseURL: "https://eazy-food.firebaseio.com",
-    projectId: "eazy-food",
-    storageBucket: "eazy-food.appspot.com",
-    messagingSenderId: "1078836929364",
-    appId: "1:1078836929364:web:e1d5a0228dcafe180ddec1",
-    measurementId: "G-86CSQNS2Y1"
-};
-
-export const startFirebase = ()=>{
-    firebase.initializeApp(firebaseConfig);
-}
-
-export const signUp = async(email, password)=>{    
-    try{
-        signedUpUser = await firebase.auth().createUserWithEmailAndPassword('ode@gef.com', '123456');
-        console.log(signedUpUser);
-        return signedUpUser;
-    }catch(e){
-        console.log(e);
+export class User{
+    constructor(){
+        this.currentUser;
     }
-}
 
-export const signIn = async(email, password)=>{
-    try {
-        signedInUser = await firebase.auth().signInWithEmailAndPassword('email', 'password');
-        return signedInUser;
-    } catch (e) {
-        console.log(e);
+    init(){
+        const firebaseConfig = {
+            apiKey: config.apiKey,
+            authDomain: "eazy-food.firebaseapp.com",
+            databaseURL: "https://eazy-food.firebaseio.com",
+            projectId: "eazy-food",
+            storageBucket: "eazy-food.appspot.com",
+            messagingSenderId: "1078836929364",
+            appId: "1:1078836929364:web:e1d5a0228dcafe180ddec1",
+            measurementId: "G-86CSQNS2Y1"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+    }
+
+    fetchCurrentUser(){
+        firebase.auth().onAuthStateChanged((user)=>{
+            if(user){
+                console.log(user);
+                localStorage.setItem('username', user.displayName);
+            }else{
+                console.log('No user found');
+                localStorage.clear('user');
+            }
+        });
+    }
+
+    async signUp (email, password, displayName){
+        console.log(displayName);
+        try{
+            await firebase.auth().createUserWithEmailAndPassword(email, password);
+            if(firebase.auth().currentUser != null){
+                firebase.auth().currentUser.updateProfile(
+                    {
+                        displayName : displayName
+                    }
+                );
+            }
+        }catch(e){
+            authDone();
+            showError(e.code);
+        }
+    }
+
+    async signIn(email, password){
+        try {
+            await firebase.auth().signInWithEmailAndPassword(email, password);
+        } catch (e) {
+            authDone();
+            showError(e.code);
+        }
+    }
+
+    async signOut(){
+        try {
+            await firebase.auth().signOut();
+            localStorage.clear('username');
+            window.open(`http://127.0.0.1:8080`);
+        } catch (e) {
+            console.log(e);
+        }
     }
 }

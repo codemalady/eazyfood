@@ -27,5 +27,10 @@ export const DOM = {
     'auth-popup': '.auth__popup',
     'auth-switch' : 'auth-toggle', //Passing the id not the class name
     'auth-label': '.auth__form--toggle',
-    'auth-content' : '.auth__form'
+    'auth-content' : '.auth__form',
+    'auth-btn' : '.auth__form--btn',
+    'current-user': '.dashboard__header--user',
+    'sign-out' : 'sign-out', //ID for logout button,
+    'general-nav' : '.general__sidebar__btns',
+    'dashboard-nav': '.dashboard__menu__btns'
 }

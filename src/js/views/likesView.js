@@ -18,7 +18,7 @@ export const isProductLiked = (likeStatus)=>{
 
 export const showLikesOnUI = (products)=>{
     let html = [], newHtml;
-    if(products.length !== 0){
+    if(products !== null && products.length !== 0){
         for (const product of products) {
             html.unshift(
                 `
