@@ -8,6 +8,10 @@
     cursor: pointer;
     transition: all .2s;
 
+    @include respond(phone){
+        height: 35rem;
+    }
+
     &:hover{
         transform: scale(1.02);
         box-shadow: 0 1rem 1.5rem rgba(black, .2);

@@ -2,6 +2,11 @@
     &__group{
         display: inline-block;
         margin-right: 1rem;
+
+        @include respond(phone){
+            display: block;
+            margin-bottom: 1rem;
+        }
     }
 
     &__label{
@@ -24,6 +29,11 @@
         &:focus{
             outline: none;
         }
+
+        @include respond(phone){
+            height: 5rem;
+            width: 40rem;   
+        }
     }
 
     &__btn{
@@ -39,6 +49,13 @@
 
         &:hover{
             background-color: $color-primary-dark; 
+        }
+
+        @include respond(phone){
+            font-size: 2.5rem;
+            text-align: center;
+            width: 40rem;
+            background-color: darken($color-primary-dark, 10%);
         }
     }
 }

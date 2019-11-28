@@ -6,9 +6,37 @@
     }
 }
 
+//MEDIA QUERY MANAGER
+
+/*
+    phones = 0 - 600px
+    tab-port = 600px - 900px;
+    tab-land = 900px -1200px;
+    1200px - 1800px = Normal styling applies
+    big-desk = 1800px
+*/
+
 @mixin respond($device) {
     @if $device == phone {
-        @media (max-width: 600px){
+        @media (max-width: 37.5em){
+            @content;
+        }
+    }
+
+    @if $device == tab-port {
+        @media (max-width: 56.25em){
+            @content;
+        }
+    }
+
+    @if $device == tab-land {
+        @media (max-width: 75em){
+            @content;
+        }
+    }
+
+    @if $device == big-desk {
+        @media (min-width: 112.5em){
             @content;
         }
     }

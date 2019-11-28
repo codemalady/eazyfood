@@ -3,5 +3,14 @@
 
     &__icon{
         font-size: 6rem;
+
+        @include respond(phone){
+            font-size: 8rem;
+        }
+    }
+
+    @include respond(phone){
+        width: 50%;
+        font-size: 2rem;
     }
 }
