@@ -56,15 +56,11 @@ export const toggleAuthModes = ()=> {
 }
 
 export const showAuthPopup = ()=>{
-    document.querySelector(DOM.auth).style.opacity = '1';
-    document.querySelector(DOM.auth).style.visibility = 'visible';
-    document.querySelector(DOM["auth-popup"]).style.transform = 'scale(1) translate(-50%, -50%)';
+    document.querySelector(DOM.auth).classList.toggle('active');
 }
 
 export const closeAuthPopup = ()=>{
-    document.querySelector(DOM.auth).style.opacity = '0';
-    document.querySelector(DOM.auth).style.visibility = 'hidden';
-    document.querySelector(DOM["auth-popup"]).style.transform = 'scale(.8) translate(-50%, -50%)';
+    document.querySelector(DOM.auth).classList.toggle('active');
 }
 
 export const retrieveUserData = ()=>{

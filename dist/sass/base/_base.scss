@@ -2,15 +2,15 @@ html{
     font-size: 62.5%;
 
     @include respond(tab-land){
-        font-size: 50%;
+        font-size: 55%;
     }
 
     @include respond(tab-port){
-        font-size: 40%;
+        font-size: 50%;
     }
 
     @include respond(phone){
-        font-size: 35%;
+        font-size: 40%;
     }
 
     @include respond(big-desk){

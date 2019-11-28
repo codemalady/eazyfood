@@ -21,6 +21,10 @@
     position: relative;
     overflow: hidden;
 
+    @include respond(phone){
+        padding: 2rem 0;
+    }
+
     &__content{
         margin: 12rem auto;
         color: black;
@@ -60,12 +64,12 @@
 
     &__character{
         animation: moveInLeft;
+
         &--img{
             width: 150%;
 
             @include respond(phone){
-                margin-top: -.5rem;
-                width: 100%;
+                display: none;
             }
         }
     }
@@ -81,7 +85,6 @@
 
     &__banner{
         float: left;
-        background-color: red;
         width: calc((100vw - .3rem )/ 2);
         height: inherit;
         position: relative;
@@ -130,6 +133,7 @@
             @include respond(phone){
                 font-size: 3rem;
                 display: block;
+                color: white;
                 opacity: 1;
             }
 

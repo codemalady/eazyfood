@@ -2,14 +2,14 @@
     height: 25rem;
     width: 100%;
     background-color: #f9f9f9;
-    border-radius: .3rem;
+    border-radius: .5rem;
     position: relative;
     overflow: hidden;
     cursor: pointer;
     transition: all .2s;
 
     @include respond(phone){
-        height: 35rem;
+        height: 50rem;
     }
 
     &:hover{
@@ -22,6 +22,10 @@
         width: 100%;
         overflow: hidden;
         transition: all .3s;
+
+        @include respond(phone){
+            height: 50%;
+        }
     }
 
     &__details{
@@ -37,6 +41,10 @@
             color: black;
             font-weight: 700;
             text-transform: uppercase;
+
+            @include respond(phone){
+                font-size: 4rem;
+            }
         }
 
         &--price{
@@ -44,6 +52,10 @@
             font-size: 2rem;
             font-weight: 400;
             color: $color-primary-dark;
+
+            @include respond(phone){
+                font-size: 3rem;
+            }
         }
     }
 
@@ -72,12 +84,11 @@
             font-weight: 900;
             color: #6e5302;
             padding: .2rem;
+        }
 
-            // &:link, &:active{
-            //     text-decoration: none;
-            //     padding: .4rem;
-            // }
-
+        @include respond(phone){
+            display: none;
+            visibility: hidden;
         }
         
     }
@@ -85,5 +96,48 @@
     &:hover &__capsule{
         top: 55%;
         opacity: 1;
+    }
+
+    &__btns{
+        display: none;
+
+        @include respond(phone){
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 1.25rem 0 1rem 0;
+            width: 100%;
+            background-color: $color-primary;
+            color: white;
+            border-top-left-radius: 5rem;
+            border-top-right-radius: 5rem;
+        }
+        
+        &--btn{
+            display: inline-block;
+            width: 30%;
+            transform: translateX(12.5%);
+
+            &--icon{
+                color: black;
+                font-size: 2.5rem;
+                font-weight: 700;
+                position: absolute;
+                top: 55%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                &-box{
+                    display: inline-block;
+                    height: 5.5rem;
+                    width: 5.5rem;
+                    background-color: white;
+                    box-shadow: 0 .5rem 3rem rgba(black, .2);
+                    border-radius: 50%;
+                    position: relative;
+                }
+            }
+        }
     }
 }

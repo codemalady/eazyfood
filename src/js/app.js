@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', async()=>{
     state.user.fetchCurrentUser();
 });
 
-/* Open and close auth popup */
+/* Open and close auth popup if no user if found */
 document.querySelector('body').addEventListener('click', (e)=>{
     if(e.target.parentNode.className === 'header__menu--icon'){
         if(localStorage.getItem('username') === null){
