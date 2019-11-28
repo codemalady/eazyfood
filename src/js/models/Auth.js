@@ -65,7 +65,7 @@ export class User{
         try {
             await firebase.auth().signOut();
             localStorage.clear('username');
-            window.open(`http://127.0.0.1:8080`);
+            window.open(`http://127.0.0.1:8080`, '_self');
         } catch (e) {
             console.log(e);
         }

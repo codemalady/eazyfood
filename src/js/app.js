@@ -504,10 +504,8 @@ document.querySelector('body').addEventListener('click', async (e)=>{
 });
 
 /* Sign out from app */
-document.getElementById('sign-out').addEventListener('click', async()=>{
-    console.log('Attempting logout');
-    await state.user.signOut();
-    console.log('User logged out');
-})
-
-
+document.querySelector(DOM.dashboard).addEventListener('click', async(e)=>{
+    if(e.target.id === 'sign-out' || e.target.className === 'fad fa-sign-out-alt'){
+        await state.user.signOut();
+    }
+});
