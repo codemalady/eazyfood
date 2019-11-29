@@ -68,6 +68,10 @@
         &--img{
             width: 150%;
 
+            @include respond(tab-port){
+                width: 100%;
+            }
+
             @include respond(phone){
                 display: none;
             }
@@ -88,6 +92,10 @@
         width: calc((100vw - .3rem )/ 2);
         height: inherit;
         position: relative;
+
+        @include respond(tab-port){
+            width: 100%;
+        }
 
         @include respond(phone){
             width: 100%;
@@ -110,30 +118,41 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%,-50%);
-            color: white;
         }
 
         &__title{
             font-size: 6rem;
             text-transform: capitalize;
+            color: white;
+
+            @include respond(tab-port){
+                font-size: 8rem;
+            }
 
             @include respond(phone){
-                font-size: 8rem;
+                font-size: 6rem;
             }
         }
 
         &__content{
             font-size: 2rem;
             font-weight: 100;
-            display: none;
+            color: white;
+            visibility: hidden;
             opacity: 0;
             transform: translateY(2rem);
             transition: all 1000s ease;
 
-            @include respond(phone){
-                font-size: 3rem;
-                display: block;
+            @include respond(tab-port){
+                font-size: 3.5rem;
+                visibility: visible;
+                opacity: 1;
                 color: white;
+            }
+
+            @include respond(phone){
+                font-size: 2rem;
+                visibility: visible;
                 opacity: 1;
             }
 
@@ -159,6 +178,7 @@
         &:hover &__content{
             display: block;
             opacity: 1;
+            color: white;
             transform: translateY(0);
         }
     }

@@ -2,7 +2,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { DOM } from './base';
-import {Product, fetchProducts} from './models/Product';
+import {Product, fetchProducts, fetchProductsLocally} from './models/Product';
 import { showProducts, viewProduct as viewP, closeProduct as closeP, showLoader, hideLoader } from './views/productView';
 import { Search } from './models/Search';
 import { showSearchResults, endCurrentSearch } from './views/searchView';
@@ -148,12 +148,15 @@ const init = ()=>{
 state.products = new Array();
 window.addEventListener('load', async ()=>{
     try {
-        let fetchedProducts = await fetchProducts();
+        let demo = await fetchProductsLocally();
+        console.log(demo.products);
+        
+        // let fetchedProducts = await fetchProducts();
         showLoader();
         /* If products are available, transfer into state */
-        if(fetchedProducts){
+        if(demo.products){
             hideLoader();
-            for (const product of fetchedProducts) {
+            for (const product of demo.products) {
                 const newProduct = new Product(product.productId, product.name.toLowerCase(), product.imageUrl, product.price, product.moq, product.categories)
                 state.products.push(newProduct);
             }
