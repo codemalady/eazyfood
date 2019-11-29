@@ -6,7 +6,7 @@
 
     &__menu{
         float: left;
-        // width: 7%;
+        width: 0%;
         height: 100vh;
         position: fixed;
         top: 0;
@@ -14,6 +14,12 @@
         opacity: 0;
         visibility: hidden;
         transition: all .5s ease;
+        z-index: 5;
+
+        // @include respond(phone){
+        //     opacity: 0;
+        //     visibility: hidden;   
+        // }
 
         &__btns{
             position: absolute;
@@ -74,6 +80,10 @@
         &--input{
             opacity: 0;
             visibility: hidden;
+
+            @include respond(phone){
+                display: none;
+            }
         }
 
         &--input:checked ~ &--label &--label--icon{
@@ -104,6 +114,10 @@
             background-color: white;
             box-shadow: 0 .5rem 1rem rgba(black, .1);
             position: relative;
+
+            @include respond(phone){
+                display: none;  
+            }
 
             &--icon{
                 display: inline-block;
@@ -150,6 +164,24 @@
     &__main{
         float: left;
         width: 80%;
+        position: relative;
+
+        @include respond(phone){
+            width: 100%;
+        }
+    }
+
+    &__navbar{
+        @include respond(phone){
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 7rem;
+            width: 100vw;
+            background-color: $color-primary;
+            z-index: 2;
+            box-shadow: 0 .5rem 3rem rgba(black, .2);
+        }
     }
 
     &__header{
@@ -160,6 +192,10 @@
             font-size: 1.6rem;
             color: black;
             transform: translateY(-2rem);
+
+            @include respond(phone){
+                display: none;  
+            }
         }
     }
 
@@ -173,6 +209,10 @@
             font-size: 1.5rem;
             color: #CAC8CF;
             cursor: pointer;
+
+            @include respond(phone){
+                font-size: 2rem;
+            }
         }
     }
 
@@ -184,6 +224,12 @@
         border: 1px solid #F6F8FC;
         background-color: #F8F8F7;
         border-radius: .5rem;
+
+        @include respond(phone){
+            width: 90%;
+            font-size: 2.5rem;
+            padding: 1.5rem 1rem 1.5rem 6rem;
+        }
 
         &::-webkit-input-placeholder{
             color: grey;
@@ -215,9 +261,9 @@
             visibility: hidden;
             overflow-y: scroll;
 
-            // &::-webkit-scrollbar{
-            //     display: none;
-            // }
+            @include respond(phone){
+                width: 90%;
+            }
 
             &.empty{
                 max-height: 5rem;
@@ -263,9 +309,19 @@
         overflow: hidden;
         position: relative;
 
+        @include respond(phone){
+            margin-top: -5rem;
+            width: 90%;
+            margin-left: 5rem;
+        }
+
         &--img{
             width: 50%;
             transform: translateY(-3rem) translateX(-5rem);
+
+            @include respond(phone){
+                transform: translateY(-1.5rem) translateX(-2.5rem);
+            }
         }
 
         &--text{
@@ -279,6 +335,11 @@
                 font-size: 2rem;
                 font-weight: 700;
                 color: #FB7949;
+
+                @include respond(phone){
+                    width: 150%;
+                    font-size: 2.25rem;
+                }
             }
 
             &--subtitle{
@@ -286,6 +347,11 @@
                 font-size: 1.2rem;
                 font-weight: 400;
                 color: #D2CBC3;
+
+                @include respond(phone){
+                    width: 100%;
+                    font-size: 1.5rem;
+                }
             }
         }
 
@@ -300,13 +366,17 @@
                 font-weight: 400;
                 font-size: 1.2rem;
                 text-decoration: none;
+
+                @include respond(phone){
+                    font-size: 1.5rem;
+                }
             }
         }
     }
 
     &__markets{
         margin-top: 7.5rem;
-
+        
         &--title{
             color: black;
         }
@@ -323,11 +393,12 @@
             border-radius: 2rem;
             cursor: pointer;
 
-            &--icon{
-                &--left{
-                    margin-right: .5rem;
-                }
+            @include respond(phone){
+                padding: 1rem 2rem .5rem 2rem;
+                // transform: translateX(-rem);
+            }
 
+            &--icon{
                 &--left{
                     margin-right: .5rem;
                 }
@@ -352,6 +423,13 @@
         right: 0;
         background-color: #FCFCFA;
         box-shadow: 0 .3rem .3rem rgba(black, .1);
+
+        @include respond(phone){
+            width: 0%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+        }
 
         &--header{
             position: absolute;

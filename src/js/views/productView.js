@@ -8,16 +8,45 @@ export const showProducts = (catID, prdts) =>{
                 productsArr.push(
                 `<div class="col-1-of-3">
                     <div class="product" id=${prdt.id}>
-                    <img src=${prdt.imageUrl} class="product__img"></img>
-                    <div class="product__capsule">
-                        <ul class="product__capsule--icons">
-                            <li><span class="product__capsule--icon"><span><i class="icon-ecommerce-bag"></i></span></span></li>
-                            <li><span class="product__capsule--icon"><span><i class="icon-basic-magnifier"></i></span></span></li>
-                            <li><span class="product__capsule--icon"><span class="product__capsule--icon"><i class="icon-basic-heart"></i></span></span></li>
-                        </ul>
-                    </div>
-                    <div class="product__details">
-                        <h2 class="product__details--info"><span class="product__details--name">${prdt.name}</span><span class="product__details--price">₦${prdt.price}.00</span></h2>
+                        <img src=${prdt.imageUrl} class="product__img"></img>
+                        <div class="product__capsule">
+                            <ul class="product__capsule--icons">
+                                <li><span class="product__capsule--icon"><span><i class="icon-ecommerce-bag"></i></span></span></li>
+                                <li><span class="product__capsule--icon"><span><i class="icon-basic-magnifier"></i></span></span></li>
+                                <li><span class="product__capsule--icon"><span class="product__capsule--icon"><i class="icon-basic-heart"></i></span></span></li>
+                            </ul>
+                        </div>
+                        <div class="product__details">
+                            <h2 class="product__details--info"><span class="product__details--name">${prdt.name}</span><span class="product__details--price">₦${prdt.price}.00</span></h2>
+                        </div>
+                        <div class="product__btns">
+                            <div class="product__btns--btn u-center-text">
+                                <span class="product__btns--btn--icon-box">
+                                    <span class="product__btns--btn--icon">
+                                        <span>
+                                            <i class="icon-ecommerce-bag"></i>
+                                        </span>
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="product__btns--btn u-center-text">
+                                <span class="product__btns--btn--icon-box">
+                                    <span class="product__btns--btn--icon">
+                                        <span>
+                                            <i class="icon-basic-magnifier"></i>
+                                        </span>
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="product__btns--btn u-center-text">
+                                <span class="product__btns--btn--icon-box">
+                                    <span class="product__btns--btn--icon">
+                                        <span>
+                                            <i class="icon-basic-heart"></i>
+                                        </span>
+                                    </span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>`);

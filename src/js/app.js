@@ -45,6 +45,7 @@ const marketEventListener = ()=>{
 }
 
 //TOGGlE DASHBOARD MENU
+
 /* Function to toggle the menus if menu input label is checked */
 const toggleMenu = ()=>{
     if(document.querySelector(DOM["dashboard-menu-toggle"]).checked){

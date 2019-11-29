@@ -138,8 +138,7 @@
             font-size: 2rem;
             font-weight: 100;
             color: white;
-            visibility: hidden;
-            opacity: 0;
+            display: none;
             transform: translateY(2rem);
             transition: all 1000s ease;
 
@@ -177,7 +176,6 @@
 
         &:hover &__content{
             display: block;
-            opacity: 1;
             color: white;
             transform: translateY(0);
         }

@@ -10,23 +10,45 @@
 
     [class^="col-"]{
         float: left;
+        // background-color: orangered;
 
         &:not(:last-child){
             margin-right: 1.5rem;
             margin-bottom: 1.5rem;
+
+            @include respond(phone){
+                margin-bottom: 4rem;
+            }
         }
     }
 
     .col-1-of-2{
         width: calc((95% - 1rem) / 2);
+
+        @include respond(phone){
+            width: 35%;
+            margin-left: 5rem;
+        }
     }
 
     .col-1-of-3{
         width: calc((95% - 2*(1rem)) / 3);
+
+        @include respond(phone){
+            width: 100%;
+            padding: 0 6rem;
+            margin-left: 0;
+        }
     }
 
     .col-2-of-3{
         width: calc((2 * (95% - 2*#{$gutter-horizontal}) / 3) + #{$gutter-horizontal});
+
+        @include respond(phone){
+            width: 100%;
+            margin-top: 5rem;
+            margin-left: 3rem;
+        }
     }
 
     .col-1-of-4{
@@ -51,6 +73,15 @@
 
     .col-1-of-10{
         width: calc((90% - 9*(1rem)) / 10);
+
+        @include respond(phone){
+            width: calc((95% - 6*1rem) / 7);
+            margin-left: 2.5rem;
+            margin-bottom: 1.5rem !important;
+            // width: 10%;
+            // margin-left: 2rem;
+            // margin-bottom: 1.5rem;
+        }
     }
 
     .col-1-of-12{
