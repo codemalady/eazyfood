@@ -167,7 +167,7 @@
         position: relative;
 
         @include respond(phone){
-            width: 100%;
+            width: 80%;
         }
     }
 
@@ -226,7 +226,7 @@
         border-radius: .5rem;
 
         @include respond(phone){
-            width: 90%;
+            width: 100%;
             font-size: 2.5rem;
             padding: 1.5rem 1rem 1.5rem 6rem;
         }
@@ -262,7 +262,7 @@
             overflow-y: scroll;
 
             @include respond(phone){
-                width: 90%;
+                width: 100%;
             }
 
             &.empty{
@@ -311,8 +311,8 @@
 
         @include respond(phone){
             margin-top: -5rem;
-            width: 90%;
-            margin-left: 5rem;
+            width: 100%;
+            margin-left: 7.5rem;
         }
 
         &--img{
@@ -374,8 +374,15 @@
         }
     }
 
+    // #cat-box{
+    //     @include respond(phone){
+    //         width: 100%;
+    //     }
+    // }
+
     &__markets{
         margin-top: 7.5rem;
+        // width: 90%;
         
         &--title{
             color: black;
@@ -394,7 +401,7 @@
             cursor: pointer;
 
             @include respond(phone){
-                padding: 1rem 2rem .5rem 2rem;
+                padding: 1rem 3.5rem .5rem 3.5rem;
                 // transform: translateX(-rem);
             }
 
@@ -405,6 +412,10 @@
 
                 &--right{
                     margin-left: .5rem;
+
+                    @include respond(phone){
+                        display: none;
+                    }
                 }
             }
         }

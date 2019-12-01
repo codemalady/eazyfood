@@ -26,8 +26,9 @@
         width: calc((95% - 1rem) / 2);
 
         @include respond(phone){
-            width: 35%;
-            margin-left: 5rem;
+            width: 45%;
+            margin-left: 1rem;
+            transform: translateX(6rem);
         }
     }
 
@@ -36,8 +37,7 @@
 
         @include respond(phone){
             width: 100%;
-            padding: 0 6rem;
-            margin-left: 0;
+            margin-left: 6rem;
         }
     }
 
@@ -47,7 +47,7 @@
         @include respond(phone){
             width: 100%;
             margin-top: 5rem;
-            margin-left: 3rem;
+            margin-left: 6rem;
         }
     }
 
@@ -75,9 +75,10 @@
         width: calc((90% - 9*(1rem)) / 10);
 
         @include respond(phone){
-            width: calc((95% - 6*1rem) / 7);
-            margin-left: 2.5rem;
+            width: 15%;
+            margin-left: .5rem;
             margin-bottom: 1.5rem !important;
+            transform: translateX(6.5rem);
             // width: 10%;
             // margin-left: 2rem;
             // margin-bottom: 1.5rem;
