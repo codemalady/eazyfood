@@ -11,9 +11,27 @@ export const showProducts = (catID, prdts) =>{
                         <img src=${prdt.imageUrl} class="product__img"></img>
                         <div class="product__capsule">
                             <ul class="product__capsule--icons">
-                                <li><span class="product__capsule--icon"><span><i class="icon-ecommerce-bag"></i></span></span></li>
-                                <li><span class="product__capsule--icon"><span><i class="icon-basic-magnifier"></i></span></span></li>
-                                <li><span class="product__capsule--icon"><span class="product__capsule--icon"><i class="icon-basic-heart"></i></span></span></li>
+                                <li>
+                                    <span class="product__capsule--icon">
+                                        <span>
+                                            <i class="fad fa-shopping-basket"></i>
+                                        </span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span href="#" class="product__capsule--icon">
+                                        <span>
+                                            <i class="fad fa-search"></i>
+                                        </span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span href="#" class="product__capsule--icon">
+                                        <span>
+                                            <i class="fad fa-heart"></i>
+                                        </span>
+                                    </span>
+                                </li>
                             </ul>
                         </div>
                         <div class="product__details">
@@ -24,7 +42,7 @@ export const showProducts = (catID, prdts) =>{
                                 <span class="product__btns--btn--icon-box">
                                     <span class="product__btns--btn--icon">
                                         <span>
-                                            <i class="icon-ecommerce-bag"></i>
+                                            <i class="fad fa-shopping-basket"></i>
                                         </span>
                                     </span>
                                 </span>
@@ -33,7 +51,7 @@ export const showProducts = (catID, prdts) =>{
                                 <span class="product__btns--btn--icon-box">
                                     <span class="product__btns--btn--icon">
                                         <span>
-                                            <i class="icon-basic-magnifier"></i>
+                                            <i class="fad fa-search"></i>
                                         </span>
                                     </span>
                                 </span>
@@ -42,7 +60,7 @@ export const showProducts = (catID, prdts) =>{
                                 <span class="product__btns--btn--icon-box">
                                     <span class="product__btns--btn--icon">
                                         <span>
-                                            <i class="icon-basic-heart"></i>
+                                            <i class="fad fa-heart"></i>
                                         </span>
                                     </span>
                                 </span>

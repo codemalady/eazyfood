@@ -681,11 +681,9 @@ body {
     .product__capsule--icon {
       font-weight: 900;
       color: #6e5302;
-      padding: .2rem; }
-      .product__capsule--icon--search {
-        height: 1rem;
-        width: 1rem;
-        fill: #dca704; }
+      padding: .25rem; }
+      .product__capsule--icon--heart {
+        transform: translateX(-0.5rem); }
     @media (max-width: 56.25em) {
       .product__capsule {
         display: none;

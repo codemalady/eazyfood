@@ -24,12 +24,12 @@ window.addEventListener('load', ()=>{
 const marketEventListener = ()=>{
     document.querySelector('.market').addEventListener('click', (e) => {
         /* Setting up product popup for homepage */
-        if(e.target.className === 'icon-basic-magnifier'){
+        if(e.target.className === 'fad fa-search'){
             e.preventDefault();
             const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
             window.open(`http://127.0.0.1:8080/dashboard.html?${productID}`, '_blank');
 
-        }else if(e.target.className === 'icon-ecommerce-bag'){
+        }else if(e.target.className === 'fad fa-shopping-basket'){
             e.preventDefault();
             const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();        
             window.open(`http://127.0.0.1:8080/dashboard.html?add-${productID}`, '_blank');
@@ -216,7 +216,7 @@ const toggleProductCategories = ()=>{
 /* View product and show product popup */
 const viewProduct = ()=>{
     document.querySelector(DOM.dashboard).addEventListener('click', (e)=>{
-        if(e.target.className === 'icon-basic-magnifier'){
+        if(e.target.className === 'fad fa-search'){
             e.preventDefault();
             const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
             viewP(productID, state.products);
@@ -294,7 +294,7 @@ const cartCountTotal = ()=>{
 const addToCart = ()=>{
     document.querySelector(DOM.dashboard).addEventListener('click', (e)=>{
         /* Add to shopping list */
-        if(e.target.className === 'icon-ecommerce-bag'){
+        if(e.target.className === 'fad fa-shopping-basket'){
             e.preventDefault();
             const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
             productToAdd = state.shoppingList.addItems(productID, state.products);
