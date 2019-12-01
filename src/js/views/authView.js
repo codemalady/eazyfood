@@ -86,7 +86,11 @@ export const authLoading = ()=>{
     document.querySelector(DOM["auth-btn"]).innerHTML = `<div class="loader"></div>`;
 }
 
-export const authDone = ()=>{
+export const signInDone = ()=>{
+    document.querySelector(DOM["auth-btn"]).innerHTML = `<p>sign in</p>`;
+}
+
+export const signUpDone = ()=>{
     document.querySelector(DOM["auth-btn"]).innerHTML = `<p>sign up</p>`;
 }
 

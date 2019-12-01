@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { config } from '../../../config';
-import { authDone, showError } from '../views/authView'
+import { showError, signUpDone, signInDone } from '../views/authView'
 
 export class User{
     constructor(){
@@ -47,7 +47,7 @@ export class User{
                 );
             }
         }catch(e){
-            authDone();
+            signUpDone();
             showError(e.code);
         }
     }
@@ -56,7 +56,7 @@ export class User{
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password);
         } catch (e) {
-            authDone();
+            signInDone();
             showError(e.code);
         }
     }

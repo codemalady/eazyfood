@@ -32,5 +32,7 @@ export const DOM = {
     'current-user': '.dashboard__header--user',
     'sign-out' : 'sign-out', //ID for logout button,
     'general-nav' : '.general__sidebar__btns',
-    'dashboard-nav': '.dashboard__menu__btns'
+    'dashboard-nav': '.dashboard__menu__btns',
+    'dashboard-mobile': '.dashboard__navbar--checkbox',
+    'dashboard-tray' : '.dashboard__tray'
 }

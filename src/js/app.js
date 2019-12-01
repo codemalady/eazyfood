@@ -11,7 +11,7 @@ import { showCart, addToCartUI, removeFromCartUI, updateItemInCartUI } from './v
 import { Like } from './models/Like';
 import { isProductLiked, showLikesOnUI, deleteLikeOnUI } from './views/likesView';
 import { User } from './models/Auth';
-import { initializeAuth, toggleAuthModes, showAuthPopup, closeAuthPopup, retrieveUserData, authLoading, authDone, showCurrentUser} from './views/authView';
+import { initializeAuth, toggleAuthModes, showAuthPopup, closeAuthPopup, retrieveUserData, authLoading, signInDone, signUpDone, showCurrentUser} from './views/authView';
 
 /* Global App State */
 const state = {};
@@ -58,11 +58,23 @@ const toggleMenu = ()=>{
         document.querySelector(DOM["dashboard-menu"]).style.visibility = 'hidden';
     }
 }
+
+/* Function to toggle the menus if menu input label is checked  --- MOBILE & TABLET PORTRAIT */
+const toggleMobieMenu = ()=>{
+    if(document.querySelector(DOM["dashboard-mobile"]).checked){
+        document.querySelector(DOM["dashboard-tray"]).style.opacity = '1';
+        document.querySelector(DOM["dashboard-tray"]).style.visibility = 'visible';
+    }else{
+        document.querySelector(DOM["dashboard-tray"]).style.opacity = '0';
+        document.querySelector(DOM["dashboard-tray"]).style.visibility = 'hidden';
+    }
+}
+
 /* Event listener to be added to the menu button at initialization of webapp */
-const setupMenuEventListener = (pageClass)=>{
+const setupMenuEventListener = ()=>{
     /* Some buttons to be hidden when user isnt logged in */
     if(localStorage.getItem('username') === null){
-        document.querySelector(pageClass).innerHTML = `
+        document.querySelector(DOM["dashboard-nav"]).innerHTML = `
             <li><a href="/" class="dashboard__menu__btns--btn">
                 <span class="dashboard__menu__btns--btn--icon">
                     <i class="fad fa-home"></i>
@@ -82,8 +94,13 @@ const setupMenuEventListener = (pageClass)=>{
                 <span class="dashboard__menu__btns--btn--tooltip">Contact</span>
             </a></li>
         `;
+        document.querySelector(DOM["dashboard-tray"]).innerHTML = `
+            <a href="/" class="dashboard__tray--menu">Home</a>
+            <a href="/favorites.html" class="dashboard__tray--menu">Favorites</a>
+            <a href="#" class="dashboard__tray--menu">Contact</a>
+        `;
     }else{
-        document.querySelector(pageClass).innerHTML = `
+        document.querySelector(DOM["dashboard-nav"]).innerHTML = `
             <li><a href="/" class="dashboard__menu__btns--btn">
                 <span class="dashboard__menu__btns--btn--icon">
                     <i class="fad fa-home"></i>
@@ -121,9 +138,18 @@ const setupMenuEventListener = (pageClass)=>{
                 <span class="dashboard__menu__btns--btn--tooltip">Logout</span>
             </a></li>
         `;
+        document.querySelector(DOM["dashboard-tray"]).innerHTML = `
+            <a href="/" class="dashboard__tray--menu">Home</a>
+            <a href="/favorites.html" class="dashboard__tray--menu">Favorites</a>
+            <a href="/orders.html" class="dashboard__tray--menu">Orders</a>
+            <a href="#" class="dashboard__tray--menu">Settings</a>
+            <a href="#" class="dashboard__tray--menu">Contact</a>
+            <a href="#" id="sign-out" class="dashboard__tray--menu">Logout</a>
+        `;
     }
     document.querySelector(DOM["dashboard-menu-toggle"]).checked = false;
     document.querySelector(DOM["dashboard-menu-toggle"]).addEventListener('click', toggleMenu);
+    document.querySelector(DOM["dashboard-mobile"]).addEventListener('click', toggleMobieMenu);
 }
 
 
@@ -132,7 +158,7 @@ const setupMenuEventListener = (pageClass)=>{
 const init = ()=>{
     showProducts(state.selected, state.products);
     toggleProductCategories();
-    setupMenuEventListener(DOM["dashboard-nav"]);
+    setupMenuEventListener();
     searchListener();
     viewProduct();
     closeProduct();
@@ -488,7 +514,7 @@ document.querySelector('body').addEventListener('click', async (e)=>{
             userDetails = retrieveUserData();
             await state.user.signIn(userDetails.email, userDetails.password);
             if(localStorage.getItem('username') !== null){
-                authDone();
+                signInDone();
                 window.open(`http://127.0.0.1:8080/dashboard.html`, '_self'); 
             }      
         } else {
@@ -499,7 +525,7 @@ document.querySelector('body').addEventListener('click', async (e)=>{
                 /* While signing up, wait for 2 secs before assigning user details wth updated username to user state */
                 setTimeout(()=>{
                     state.user = state.user;
-                    authDone();
+                    signUpDone();
                     window.open(`http://127.0.0.1:8080/dashboard.html`, '_self');
                 }, 2000);
             }
