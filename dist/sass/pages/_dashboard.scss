@@ -313,6 +313,122 @@
         }
     }
 
+    &__cart{
+        display: none;
+
+        @include respond(phone){
+            display: block;
+            opacity: 0;
+            visibility: hidden;
+            position: fixed;
+            top:0;
+            right: 0;
+            background-color: white;
+            height: 100%;
+            width: 0vw;
+            padding: 10rem 0 0 0;
+            overflow-y: scroll;
+            z-index: 3;
+            transition: all .3s ease;
+
+            &--header{
+                position: fixed;
+                top: 0;
+                left: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100vw;
+                height: 10rem;
+                color: black;
+                background-color: white;
+                font-size: 2.5rem;
+                box-shadow: 0 .3rem  2rem rgba(black, .2);
+                // z-index: 6;
+            }
+
+            &--title{
+                transform: translateY(.5rem);
+            }
+
+            &--close{
+                position: absolute;
+                right: 3rem;
+                font-size: 4rem;
+            }
+
+            &--content{
+                height: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            &--menu{
+                list-style: none;
+                font-size: 4rem;
+                color: black;
+                
+                &--items{
+                    margin: 1.5rem 0 3rem 0;
+                    // &:not(:last-child){
+                    //     margin: 4rem 0 2rem 0;
+                    // }
+                }
+            }
+
+            &--product{
+                width: 52.5rem;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                font-size: 2.5rem;
+                padding: 1rem 0;
+                border-radius: .5rem;
+                box-shadow: 0 .3rem  2rem rgba(black, .2);
+
+                &--close{
+                    color: red;
+                }
+
+                &--img{
+                    display: inline-block;
+                    height: 7.5rem;
+                    width: 12.5rem;
+                    border-radius: .5rem;
+                    background-image: url('../../img/banana.jpg');
+                    background-position: center;
+                    background-size: cover;
+                    position: relative;
+                }
+
+                &--description{
+                    flex: 0 0 12rem;
+                    display: flex;
+                    justify-content: space-between;
+
+                    & > *{
+                        font-size: inherit
+                    }
+                }
+
+                &--controls{
+                    color: $color-primary-dark;
+                    flex: 0 0 6rem;
+                    display: flex;
+                    justify-content: space-between;
+
+                    & > *{
+                        font-size: inherit
+                    }
+                }
+
+                &--price{
+                    color:#C5C5C4;
+                }
+            }
+        }
+    }
+
     &__header{
         padding: 3rem 0;
 

@@ -7,6 +7,13 @@ export const DOM = {
     'dashboard-cart-product': '.dashboard__sidebar--cart--product',
     'dashboard__cart-value': '.dashboard__sidebar--price--value',
     'dashboard__cart-number': '.dashboard__sidebar--header--cart',
+    'dashboard-nav': '.dashboard__menu__btns',
+    'dashboard-mobile': '.dashboard__navbar--checkbox',
+    'dashboard-tray' : '.dashboard__tray',
+    'dashboard-mobile-bag': '.dashboard__navbar--bag',
+    'dashboard-cart-bg': '.dashboard__cart',
+    'dashboard-mobile-cart' : '.dashboard__cart--menu',
+    'dashboard-mobile-product' : '.dashboard__cart--menu--items',
     'product-popup-btn': '.product-detail__card--left--content--btn',
     'preloader' : '.preloader',
     'categories': '.food-capsule',
@@ -31,8 +38,5 @@ export const DOM = {
     'auth-btn' : '.auth__form--btn',
     'current-user': '.dashboard__header--user',
     'sign-out' : 'sign-out', //ID for logout button,
-    'general-nav' : '.general__sidebar__btns',
-    'dashboard-nav': '.dashboard__menu__btns',
-    'dashboard-mobile': '.dashboard__navbar--checkbox',
-    'dashboard-tray' : '.dashboard__tray'
+    'general-nav' : '.general__sidebar__btns'
 }

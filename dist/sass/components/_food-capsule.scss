@@ -7,12 +7,20 @@
     cursor: pointer;
     position: relative;
 
+    @include respond(phone){
+        height: 12rem;
+    }
+
     &--icon{
         color: black;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+
+        @include respond(phone){
+            font-size: 2rem;
+        }
 
         &-box{
             height: 4rem;
@@ -23,6 +31,11 @@
             margin: 0 auto;
             transform: translateY(.5rem);
             position: relative;
+
+            @include respond(phone){
+                height: 5rem;
+                width: 5rem;
+            }
         }
     }
 
@@ -42,5 +55,10 @@
         top: 65%;
         left: 50%;
         transform: translate(-50%, -50%);
+
+        @include respond(phone){
+            font-size: 1.2rem;
+            top: 70%;
+        }
     }
 }

@@ -7,7 +7,7 @@ import { showProducts, viewProduct as viewP, closeProduct as closeP, showLoader,
 import { Search } from './models/Search';
 import { showSearchResults, endCurrentSearch } from './views/searchView';
 import { Shop } from './models/Shop';
-import { showCart, addToCartUI, removeFromCartUI, updateItemInCartUI } from './views/shopView';
+import { showCart, toggleMobileCart, addToCartUI, addToCartMobileUI, removeFromCartUI, updateItemInCartUI } from './views/shopView';
 import { Like } from './models/Like';
 import { isProductLiked, showLikesOnUI, deleteLikeOnUI } from './views/likesView';
 import { User } from './models/Auth';
@@ -60,7 +60,7 @@ const toggleMenu = ()=>{
 }
 
 /* Function to toggle the menus if menu input label is checked  --- MOBILE & TABLET PORTRAIT */
-const toggleMobieMenu = ()=>{
+const toggleMobileMenu = ()=>{
     if(document.querySelector(DOM["dashboard-mobile"]).checked){
         document.querySelector(DOM["dashboard-tray"]).style.opacity = '1';
         document.querySelector(DOM["dashboard-tray"]).style.visibility = 'visible';
@@ -149,7 +149,7 @@ const setupMenuEventListener = ()=>{
     }
     document.querySelector(DOM["dashboard-menu-toggle"]).checked = false;
     document.querySelector(DOM["dashboard-menu-toggle"]).addEventListener('click', toggleMenu);
-    document.querySelector(DOM["dashboard-mobile"]).addEventListener('click', toggleMobieMenu);
+    document.querySelector(DOM["dashboard-mobile"]).addEventListener('click', toggleMobileMenu);
 }
 
 
@@ -159,6 +159,7 @@ const init = ()=>{
     showProducts(state.selected, state.products);
     toggleProductCategories();
     setupMenuEventListener();
+    toggleMobileCart()
     searchListener();
     viewProduct();
     closeProduct();
@@ -325,21 +326,23 @@ const addToCart = ()=>{
             const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
             productToAdd = state.shoppingList.addItems(productID, state.products);
 
-             /* Calculate total & display in UI */
+             /* Calculate total & display in UI -- Desktop */
             addToCartUI(productToAdd, state.shoppingList.sum);
             
         }else if(e.target.className === 'fal fa-plus-circle'){
             const productID = e.target.parentNode.parentNode.parentNode.id.toString();
             productToAdd = state.shoppingList.addItems(productID, state.products);
 
-             /* Calculate total & dsiplay in UI */
-            addToCartUI(productToAdd, state.shoppingList.sum);  
+             /* Calculate total & display in UI */
+            addToCartUI(productToAdd, state.shoppingList.sum);
+            // addToCartMobileUI(productToAdd, state.shoppingList.sum);
         }
 
         updateCartToStorage();
         cartCountTotal();
     });
 }
+
 
 /* Add items to cart in product popup */
 const addToCartInPopup = ()=>{
@@ -368,7 +371,7 @@ const addToCartInPopup = ()=>{
 const removeFromCart = ()=>{
     document.querySelector(DOM.dashboard).addEventListener('click', (e)=>{
         /* Remove from shopping list */        
-        if(e.target.className === 'fas fa-times'){
+        if(e.target.parentNode.className === 'dashboard__sidebar--cart--product--del' || e.target.parentNode.className === 'dashboard__cart--product--close'){
             const productID = e.target.parentNode.parentNode.id.toString(); //ID of item to be removed
             const productIndex  = e.target.parentNode.parentNode.dataset.index; //Dataset index of item to be removed
 
@@ -389,7 +392,7 @@ const removeFromCart = ()=>{
 /* Update items in cart */
 const updateShoppingList = ()=>{
     document.querySelector(DOM.dashboard).addEventListener('click', (e)=>{
-        if(e.target.className === 'fal fa-minus-circle'){
+        if(e.target.parentNode.className === 'dashboard__sidebar--cart--product--btn-rmv' || e.target.parentNode.className === 'dashboard__cart--product--rmv'){
             const productID = e.target.parentNode.parentNode.parentNode.id.toString();
             const productIndex  = e.target.parentNode.parentNode.parentNode.dataset.index; //Dataset index of item to be altered
             console.log(productID, productIndex);
@@ -404,6 +407,21 @@ const updateShoppingList = ()=>{
             /* If deleted item has count as 0, reset back to 1 */
             state.shoppingList.restoreCount(state.products);
         }
+        // else if(e.target.parentNode.className === 'dashboard__cart--product--rmv'){
+        //     const productID = e.target.parentNode.parentNode.id.toString();
+        //     const productIndex  = e.target.parentNode.parentNode.dataset.index; //Dataset index of item to be altered
+        //     console.log(productID, productIndex);
+            
+        //     /* Reduce count of item in shopping cart if more than 1, otherwise delete from cart */
+        //     productToUpdate = state.shoppingList.updateItem(productID);
+        //     updateItemInCartUI(productToUpdate, state.shoppingList.sum);
+        //     // updateItemInCartUI(productIndex, productToRemove, state.shoppingList.sum);
+        //     updateCartToStorage();
+        //     cartCountTotal();
+
+        //     /* If deleted item has count as 0, reset back to 1 */
+        //     state.shoppingList.restoreCount(state.products); 
+        // }
     });
 }
 

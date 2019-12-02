@@ -258,12 +258,18 @@ body {
   border-radius: 200rem;
   cursor: pointer;
   position: relative; }
+  @media (max-width: 37.5em) {
+    .food-capsule {
+      height: 12rem; } }
   .food-capsule--icon {
     color: black;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); }
+    @media (max-width: 37.5em) {
+      .food-capsule--icon {
+        font-size: 2rem; } }
     .food-capsule--icon-box {
       height: 4rem;
       width: 4rem;
@@ -273,6 +279,10 @@ body {
       margin: 0 auto;
       transform: translateY(0.5rem);
       position: relative; }
+      @media (max-width: 37.5em) {
+        .food-capsule--icon-box {
+          height: 5rem;
+          width: 5rem; } }
   .food-capsule.active, .food-capsule:hover {
     background-color: #FCD661;
     border: .1rem solid transparent; }
@@ -285,6 +295,10 @@ body {
     top: 65%;
     left: 50%;
     transform: translate(-50%, -50%); }
+    @media (max-width: 37.5em) {
+      .food-capsule--label {
+        font-size: 1.2rem;
+        top: 70%; } }
 
 .footer {
   margin-top: .3rem;
@@ -1072,6 +1086,88 @@ body {
           font-size: 2rem;
           margin: 1rem 0;
           text-decoration: none; } }
+
+.dashboard__cart {
+  display: none; }
+  @media (max-width: 37.5em) {
+    .dashboard__cart {
+      display: block;
+      opacity: 0;
+      visibility: hidden;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: white;
+      height: 100%;
+      width: 0vw;
+      padding: 10rem 0 0 0;
+      overflow-y: scroll;
+      z-index: 3;
+      transition: all .3s ease; }
+      .dashboard__cart--header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 10rem;
+        color: black;
+        background-color: white;
+        font-size: 2.5rem;
+        box-shadow: 0 0.3rem 2rem rgba(0, 0, 0, 0.2); }
+      .dashboard__cart--title {
+        transform: translateY(0.5rem); }
+      .dashboard__cart--close {
+        position: absolute;
+        right: 3rem;
+        font-size: 4rem; }
+      .dashboard__cart--content {
+        height: 100%;
+        display: flex;
+        justify-content: center; }
+      .dashboard__cart--menu {
+        list-style: none;
+        font-size: 4rem;
+        color: black; }
+        .dashboard__cart--menu--items {
+          margin: 1.5rem 0 3rem 0; }
+      .dashboard__cart--product {
+        width: 52.5rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 2.5rem;
+        padding: 1rem 0;
+        border-radius: .5rem;
+        box-shadow: 0 0.3rem 2rem rgba(0, 0, 0, 0.2); }
+        .dashboard__cart--product--close {
+          color: red; }
+        .dashboard__cart--product--img {
+          display: inline-block;
+          height: 7.5rem;
+          width: 12.5rem;
+          border-radius: .5rem;
+          background-image: url("../../img/banana.jpg");
+          background-position: center;
+          background-size: cover;
+          position: relative; }
+        .dashboard__cart--product--description {
+          flex: 0 0 12rem;
+          display: flex;
+          justify-content: space-between; }
+          .dashboard__cart--product--description > * {
+            font-size: inherit; }
+        .dashboard__cart--product--controls {
+          color: #dca704;
+          flex: 0 0 6rem;
+          display: flex;
+          justify-content: space-between; }
+          .dashboard__cart--product--controls > * {
+            font-size: inherit; }
+        .dashboard__cart--product--price {
+          color: #C5C5C4; } }
 
 .dashboard__header {
   padding: 3rem 0; }
