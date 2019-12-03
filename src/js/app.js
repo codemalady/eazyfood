@@ -27,12 +27,12 @@ const marketEventListener = ()=>{
         if(e.target.className === 'fad fa-search'){
             e.preventDefault();
             const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
-            window.open(`http://127.0.0.1:8080/dashboard.html?${productID}`, '_blank');
+            window.open(`/dashboard.html?${productID}`, '_blank');
 
         }else if(e.target.className === 'fad fa-shopping-basket'){
             e.preventDefault();
             const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();        
-            window.open(`http://127.0.0.1:8080/dashboard.html?add-${productID}`, '_blank');
+            window.open(`/dashboard.html?add-${productID}`, '_blank');
             // if(state.user !== undefined){
             //     e.preventDefault();
             //     const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();        
@@ -512,7 +512,7 @@ document.querySelector('body').addEventListener('click', (e)=>{
         if(localStorage.getItem('username') === null){
             showAuthPopup();
         }else{
-            window.open(`http://127.0.0.1:8080/dashboard.html`);
+            window.open(`/dashboard.html`);
         }
     }else if(e.target.closest('.auth__close')){
         closeAuthPopup();
@@ -530,7 +530,7 @@ document.querySelector('body').addEventListener('click', async (e)=>{
             await state.user.signIn(userDetails.email, userDetails.password);
             if(localStorage.getItem('username') !== null){
                 signInDone();
-                window.open(`http://127.0.0.1:8080/dashboard.html`, '_self'); 
+                window.open(`/dashboard.html`, '_self'); 
             }      
         } else {
             authLoading();
@@ -541,7 +541,7 @@ document.querySelector('body').addEventListener('click', async (e)=>{
                 setTimeout(()=>{
                     state.user = state.user;
                     signUpDone();
-                    window.open(`http://127.0.0.1:8080/dashboard.html`, '_self');
+                    window.open(`/dashboard.html`, '_self');
                 }, 2000);
             }
         }
