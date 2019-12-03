@@ -10,9 +10,13 @@
 .banner{
     padding: 10rem 0;
     background-color: $color-primary;
-    background-image: url(../../img/hero-1.jpg);
+    background-image: url('../../img/hero-1.jpg');
     background-size: cover;
     opacity: .9;
+
+    @include respond(phone){
+        background-image: url('../../img/hero-1-mobile.jpg');
+    }
 }
 
 .delivery{
@@ -107,10 +111,18 @@
 
         &--1{
             background-image: url('../../img/hero-3.jpg');
+
+            @include respond(phone){
+                background-image: url('../../img/hero-3-mobile.jpg');
+            }
         }
 
         &--2{
             background-image: url('../../img/hero-4.jpg');
+
+            @include respond(phone){
+                background-image: url('../../img/hero-4-mobile.jpg');
+            }
         }
 
         &__text{
