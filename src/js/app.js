@@ -176,15 +176,12 @@ const init = ()=>{
 state.products = new Array();
 window.addEventListener('load', async ()=>{
     try {
-        let demo = await fetchProductsLocally();
-        console.log(demo.products);
-        
-        // let fetchedProducts = await fetchProducts();
+        let fetchedProducts = await fetchProducts();
         showLoader();
         /* If products are available, transfer into state */
-        if(demo.products){
+        if(fetchedProducts){
             hideLoader();
-            for (const product of demo.products) {
+            for (const product of fetchedProducts) {
                 const newProduct = new Product(product.productId, product.name.toLowerCase(), product.imageUrl, product.price, product.moq, product.categories)
                 state.products.push(newProduct);
             }
