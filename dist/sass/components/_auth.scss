@@ -45,8 +45,8 @@
         }
 
         @include respond(phone){
-            top: 60%;
-            transform: scale(1.5) translate(-32.5%, -50%);
+            top: 50%;
+            transform: scale(1.15) translate(-42.5%, -50%);
         }
     }
 
@@ -71,8 +71,8 @@
         @include respond(phone){
             top: 3rem;
             right: 3rem;
-            height: 6rem;
-            width: 6rem;    
+            height: 4rem;
+            width: 4rem;    
         }
 
         &--icon{
@@ -87,7 +87,7 @@
             }
 
             @include respond(phone){
-                font-size: 4rem;   
+                font-size: 3rem;   
             }
         }
     }

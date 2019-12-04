@@ -1,14 +1,33 @@
 .row{
     max-width: $grid-width;
     margin: 0 auto;
-
     @include clearfix;
+
+    @include respond(tab-port){
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        align-content: space-around;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    @include respond(phone){
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
     &:not(:last-child){
         margin-bottom: $gutter-vertical;
 
+        @include respond(tab-port){
+            margin-bottom: 0rem;
+        }
+
         @include respond(phone){
-            margin-bottom: 0;
+            margin-bottom: 1rem;
         }
     }
 
@@ -19,11 +38,11 @@
             margin-right: $gutter-horizontal;
 
             @include respond(tab-port){
-                margin-right: .5rem;
+                margin-right: 0;
             }
 
             @include respond(phone){
-                margin-right: 0rem;
+                margin-right: 0;
             }
         }
     }
@@ -31,15 +50,15 @@
     .col-1-of-2{
         width: calc((100% - #{$gutter-horizontal}) / 2);
 
-        @include respond(tab-port){
-            width: 100%;
-            padding: 0 15rem;
-            // margin-left: 10rem;
-            // margin-bottom: 5rem;
-        }
+        // @include respond(tab-port){
+        //     width: 45%;
+        //     // padding: 0 15rem;
+        //     // margin-left: 10rem;
+        //     // margin-bottom: 5rem;
+        // }
 
         @include respond(phone){
-            width: 100%;
+            width: 45rem;
             padding: 0 5rem;
             // margin-bottom: 5rem;
         }
@@ -50,13 +69,14 @@
 
         @include respond(tab-port){
             width: 30%;
-            margin-left: 1.5rem;
+            
+            &:not(:last-child){
+                margin-right: 3.5rem;
+            }
         }
 
         @include respond(phone){
-            width: 100%;
-            padding: 0 3.5rem;
-            margin-left: 0;
+            width: 35rem;
             margin-bottom: 5rem;
         }
     }
@@ -65,16 +85,18 @@
         width: calc((100% - 3*#{$gutter-horizontal}) / 4);
 
         @include respond(tab-port){
-            width: 40%;
-            margin-left: 6rem;
-            margin-bottom: 5rem;
+            width: 37.5rem;
+            margin-bottom: 2.5rem;
+
+            &:nth-child(even){
+                margin-left: auto;
+            }
         }
 
         @include respond(phone){
-            width: 100%;
-            padding: 0 7.5rem;
-            margin-left: 0;
-            margin-bottom: 5rem;
+            width: 37.5rem;
+            margin-bottom: 2.5rem;
+            margin-right: 0rem;
         }
     }
 

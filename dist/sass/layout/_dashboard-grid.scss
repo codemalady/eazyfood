@@ -1,8 +1,11 @@
 .dashboard-row{
     max-width: 75rem;
     margin: 0 auto;
-
     @include clearfix;
+
+    // @include respond(phone){
+    //     max-width: 100%;
+    // }
 
     &:not(:last-child){
         margin-bottom: 1rem;
@@ -36,8 +39,8 @@
         width: calc((95% - 2*(1rem)) / 3);
 
         @include respond(phone){
-            width: 100%;
-            margin-left: 6rem;
+            width: 37.5rem;
+            // margin-left: 7rem;
         }
     }
 

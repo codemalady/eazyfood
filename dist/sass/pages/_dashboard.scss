@@ -167,7 +167,7 @@
         position: relative;
 
         @include respond(phone){
-            width: 80%;
+            width: 100%;
         }
     }
 
@@ -471,7 +471,7 @@
         border-radius: .5rem;
 
         @include respond(phone){
-            width: 100%;
+            width: 80%;
             font-size: 2.5rem;
             padding: 1.5rem 1rem 1.5rem 6rem;
         }
@@ -556,7 +556,7 @@
 
         @include respond(phone){
             margin-top: -5rem;
-            width: 100%;
+            width: 80%;
             margin-left: 7.5rem;
         }
 
@@ -627,7 +627,10 @@
 
     &__markets{
         margin-top: 7.5rem;
-        // width: 90%;
+        
+        @include respond(phone){
+            width: 80%;
+        }
         
         &--title{
             color: black;
