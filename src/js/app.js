@@ -59,7 +59,7 @@ const toggleMenu = ()=>{
     }
 }
 
-/* Function to toggle the menus if menu input label is checked  --- MOBILE & TABLET PORTRAIT */
+/* Function to toggle the menus if menu input label is checked  --- MOBILE */
 const toggleMobileMenu = ()=>{
     if(document.querySelector(DOM["dashboard-mobile"]).checked){
         document.querySelector(DOM["dashboard-tray"]).style.opacity = '1';
@@ -67,6 +67,19 @@ const toggleMobileMenu = ()=>{
     }else{
         document.querySelector(DOM["dashboard-tray"]).style.opacity = '0';
         document.querySelector(DOM["dashboard-tray"]).style.visibility = 'hidden';
+    }
+}
+
+/* Function to toggle the menus if menu input label is checked  --- TABLET PORTRAIT */
+const toggleTabletMenu = ()=>{
+    if(document.querySelector('.dashboard__sliding-cart--input').checked){
+        document.querySelector('.dashboard__sidebar').style.opacity = '1';
+        document.querySelector('.dashboard__sidebar').style.visibility = 'visible';
+        document.querySelector('.dashboard__sidebar').style.width = '35%';
+    }else{
+        document.querySelector('.dashboard__sidebar').style.opacity = '0';
+        document.querySelector('.dashboard__sidebar').style.visibility = 'hidden';
+        document.querySelector('.dashboard__sidebar').style.width = '0%';
     }
 }
 
@@ -150,6 +163,7 @@ const setupMenuEventListener = ()=>{
     document.querySelector(DOM["dashboard-menu-toggle"]).checked = false;
     document.querySelector(DOM["dashboard-menu-toggle"]).addEventListener('click', toggleMenu);
     document.querySelector(DOM["dashboard-mobile"]).addEventListener('click', toggleMobileMenu);
+    document.querySelector(DOM["dashboard-body"]).addEventListener('click', toggleTabletMenu);
 }
 
 
@@ -314,6 +328,7 @@ const updateCartToStorage = ()=>{
 const cartCountTotal = ()=>{
     document.querySelector(DOM["dashboard__cart-number"]).textContent = state.shoppingList.items.length;
     document.querySelector(DOM["dashboard__cart-number-mobile"]).textContent = state.shoppingList.items.length;
+    document.querySelector('.dashboard__sliding-cart--label--count--number').textContent = state.shoppingList.items.length;
 }
 
 /* Add items to cart in dashboard */

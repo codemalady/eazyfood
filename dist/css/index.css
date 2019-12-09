@@ -22,6 +22,16 @@
   100% {
     transform: rotate(360deg); } }
 
+@keyframes moveUpAndDown {
+  0% {
+    transform: translateY(0rem); }
+  33% {
+    transform: translateY(-0.15rem); }
+  66% {
+    transform: translateY(0rem); }
+  100% {
+    transform: translateY(0.15rem); } }
+
 html {
   font-size: 62.5%; }
   @media (max-width: 75em) {
@@ -1461,6 +1471,53 @@ body {
 .dashboard__products {
   margin: 5rem 0; }
 
+.dashboard__sliding-cart--input {
+  display: none; }
+
+.dashboard__sliding-cart--label {
+  display: none; }
+  @media (max-width: 56.25em) {
+    .dashboard__sliding-cart--label {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-5rem, -50%);
+      height: 12rem;
+      width: 12rem;
+      border-radius: 50%;
+      background-color: white;
+      box-shadow: 0 0.2rem 3rem rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden; } }
+  @media (max-width: 37.5em) {
+    .dashboard__sliding-cart--label {
+      display: none; } }
+  .dashboard__sliding-cart--label--icon {
+    font-size: 4rem;
+    color: #dca704;
+    position: absolute;
+    bottom: 1rem;
+    left: 30%;
+    transform: translateX(-50%);
+    animation: moveUpAndDown 3s linear none infinite; }
+  .dashboard__sliding-cart--label--count {
+    height: 1.75rem;
+    width: 1.75rem;
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 1rem;
+    left: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .dashboard__sliding-cart--label--count--number {
+      color: white;
+      position: absolute;
+      font-size: 1.25rem; }
+
 .dashboard__sidebar {
   float: right;
   width: 25%;
@@ -1469,7 +1526,8 @@ body {
   top: 0;
   right: 0;
   background-color: #FCFCFA;
-  box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.1); }
+  box-shadow: 0 0.3rem 0.3rem rgba(0, 0, 0, 0.1);
+  transition: all .3s ease; }
   @media (max-width: 56.25em) {
     .dashboard__sidebar {
       width: 0%;
@@ -1544,7 +1602,6 @@ body {
     .dashboard__sidebar--cart--product {
       height: 4rem;
       width: 25rem;
-      background-color: firebrick;
       display: flex;
       justify-content: space-around;
       margin-bottom: 1rem;

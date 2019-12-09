@@ -728,6 +728,75 @@
         margin: 5rem 0;
     }
 
+    &__sliding-cart{
+        // @include respond(tab-port){
+        //     // margin-bottom: 7rem;
+        // }
+
+        &--input{
+            display: none;
+        }
+
+        &--label{
+            display: none;
+
+            @include respond(tab-port){
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translate(-5rem, -50%);
+                height: 12rem;
+                width: 12rem;
+                border-radius: 50%;
+                background-color: white;
+                box-shadow: 0 .2rem 3rem rgba(black, .2);
+                position: relative;
+                overflow: hidden;
+                // transform: translateY(-50%);
+            }
+
+            @include respond(phone){
+                display: none;
+            }
+
+            &--icon{
+                font-size: 4rem;
+                color: $color-primary-dark;
+                position: absolute;
+                bottom: 1rem;
+                left: 30%;
+                transform: translateX(-50%);
+                animation: moveUpAndDown 3s linear none infinite;
+            }
+
+            &--count{
+                height: 1.75rem;
+                width: 1.75rem;
+                // padding: 1rem;
+                background-color: black;
+                color: white;
+                border-radius: 50%;
+                position: absolute;
+                bottom: 1rem;
+                left: 60%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &--number{
+                    color:white;
+                    position: absolute;
+                    // top: 50%;
+                    // right: 0;
+                    font-size: 1.25rem;
+                    // transform: translateY(-5rem);
+                    // transform: translate(-25%, -50%);
+                }
+            }
+        }
+    }
+
     &__sidebar{
         float: right;
         width: 25%;
@@ -737,6 +806,7 @@
         right: 0;
         background-color: #FCFCFA;
         box-shadow: 0 .3rem .3rem rgba(black, .1);
+        transition: all .3s ease;
 
         @include respond(tab-port){
             width: 0%;
@@ -844,7 +914,6 @@
             &--product{
                 height: 4rem;
                 width: 25rem;
-                background-color: firebrick;
                 display: flex;
                 justify-content: space-around;
                 margin-bottom: 1rem;

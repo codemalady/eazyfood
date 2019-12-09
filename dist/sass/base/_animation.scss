@@ -24,3 +24,21 @@
         transform: rotate(360deg);
     }
 }
+
+@keyframes moveUpAndDown{
+    0%{
+        transform: translateY(0rem);
+    }
+
+    33%{
+        transform: translateY(-.15rem);
+    }
+
+    66%{
+        transform: translateY(0rem);
+    }
+
+    100%{
+        transform: translateY(.15rem);
+    }
+}
