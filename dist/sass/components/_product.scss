@@ -9,10 +9,16 @@
     transition: all .2s;
 
     @include respond(tab-port){
+        height: 35rem;
+    }
+
+    @include respond(phone){
         height: 45rem;
     }
 
     @include respond(phone){
+        margin: 0 auto;
+        width: 37.5rem;
         height: 35rem;
     }
 
@@ -39,6 +45,10 @@
             text-align: center;
             transform: translateY(2.5rem);
 
+            @include respond(tab-port){
+                transform: translateY(.75rem); 
+            }
+            
             @include respond(phone){
                 transform: translateY(1rem); 
             }
@@ -68,13 +78,17 @@
     }
 
     &__capsule{
+        width: 55%;
+        display: flex;
+        justify-content: center;
+        align-content: center;
         position: absolute;
-        top: 60%;
+        top: 65%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: white;
         box-shadow: 0 0 .2rem .1rem rgba(black, .2);
-        padding: .8rem 2rem .4rem 2rem;
+        padding: .8rem 0rem .3rem 0rem;
         border-radius: 5rem;
         opacity: 0;
         transition: all .3s;
@@ -82,6 +96,7 @@
 
         &--icons{
             list-style: none;
+            // transform: translateY(0);
     
             li{
                 display: inline-block;
@@ -92,6 +107,7 @@
             font-weight: 900;
             color: #6e5302;
             padding: .25rem;
+            font-size: 2rem;
 
             &--heart{
                 transform: translateX(-.5rem);
@@ -110,7 +126,7 @@
         }
 
         @include respond(tab-port){
-            display: none;
+            opacity: 0;
             visibility: hidden;
         }
 

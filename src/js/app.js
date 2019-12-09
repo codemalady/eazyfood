@@ -49,7 +49,7 @@ const marketEventListener = ()=>{
 /* Function to toggle the menus if menu input label is checked */
 const toggleMenu = ()=>{
     if(document.querySelector(DOM["dashboard-menu-toggle"]).checked){
-        document.querySelector(DOM["dashboard-menu"]).style.width= '7%';
+        document.querySelector(DOM["dashboard-menu"]).style.width= '8%';
         document.querySelector(DOM["dashboard-menu"]).style.opacity = '1';
         document.querySelector(DOM["dashboard-menu"]).style.visibility = 'visible';
     }else{
@@ -176,12 +176,13 @@ const init = ()=>{
 state.products = new Array();
 window.addEventListener('load', async ()=>{
     try {
-        let fetchedProducts = await fetchProducts();
+        // let fetchedProducts = await fetchProducts();
+        let fetchedProducts = await fetchProductsLocally();
         showLoader();
         /* If products are available, transfer into state */
         if(fetchedProducts){
             hideLoader();
-            for (const product of fetchedProducts) {
+            for (const product of fetchedProducts.products) {
                 const newProduct = new Product(product.productId, product.name.toLowerCase(), product.imageUrl, product.price, product.moq, product.categories)
                 state.products.push(newProduct);
             }
@@ -312,21 +313,23 @@ const updateCartToStorage = ()=>{
 /* Update cart count */
 const cartCountTotal = ()=>{
     document.querySelector(DOM["dashboard__cart-number"]).textContent = state.shoppingList.items.length;
+    document.querySelector(DOM["dashboard__cart-number-mobile"]).textContent = state.shoppingList.items.length;
 }
 
 /* Add items to cart in dashboard */
 const addToCart = ()=>{
-    document.querySelector(DOM.dashboard).addEventListener('click', (e)=>{
-        /* Add to shopping list */
+    document.querySelector(DOM["dashboard-body"]).addEventListener('click', (e)=>{
         if(e.target.className === 'fad fa-shopping-basket'){
-            e.preventDefault();
+            e.preventDefault();        
             const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
+            
             productToAdd = state.shoppingList.addItems(productID, state.products);
 
              /* Calculate total & display in UI -- Desktop */
             addToCartUI(productToAdd, state.shoppingList.sum);
+        }else if(e.target.parentNode.className === 'dashboard__sidebar--cart--product--btn-add' || e.target.parentNode.className === 'dashboard__cart--product--add'){
+            console.log('Adding from sidebar');
             
-        }else if(e.target.className === 'fal fa-plus-circle'){
             const productID = e.target.parentNode.parentNode.parentNode.id.toString();
             productToAdd = state.shoppingList.addItems(productID, state.products);
 
@@ -366,9 +369,12 @@ const addToCartInPopup = ()=>{
 
 /* Remove items from cart */
 const removeFromCart = ()=>{
-    document.querySelector(DOM.dashboard).addEventListener('click', (e)=>{
-        /* Remove from shopping list */        
+    document.querySelector(DOM["dashboard-body"]).addEventListener('click', (e)=>{
+        // console.log(e.target.parentNode.className);
+        
         if(e.target.parentNode.className === 'dashboard__sidebar--cart--product--del' || e.target.parentNode.className === 'dashboard__cart--product--close'){
+            console.log('Remove that shii');
+            
             const productID = e.target.parentNode.parentNode.id.toString(); //ID of item to be removed
             const productIndex  = e.target.parentNode.parentNode.dataset.index; //Dataset index of item to be removed
 
@@ -381,6 +387,7 @@ const removeFromCart = ()=>{
             /* If deleted item has count more than 1, reset back to 1 because you've removed it from cart */
             productToRemove.count = 1;
         }
+        
         updateCartToStorage();
         cartCountTotal();
     });
@@ -388,7 +395,7 @@ const removeFromCart = ()=>{
 
 /* Update items in cart */
 const updateShoppingList = ()=>{
-    document.querySelector(DOM.dashboard).addEventListener('click', (e)=>{
+    document.querySelector(DOM["dashboard-body"]).addEventListener('click', (e)=>{
         if(e.target.parentNode.className === 'dashboard__sidebar--cart--product--btn-rmv' || e.target.parentNode.className === 'dashboard__cart--product--rmv'){
             const productID = e.target.parentNode.parentNode.parentNode.id.toString();
             const productIndex  = e.target.parentNode.parentNode.parentNode.dataset.index; //Dataset index of item to be altered
@@ -404,21 +411,6 @@ const updateShoppingList = ()=>{
             /* If deleted item has count as 0, reset back to 1 */
             state.shoppingList.restoreCount(state.products);
         }
-        // else if(e.target.parentNode.className === 'dashboard__cart--product--rmv'){
-        //     const productID = e.target.parentNode.parentNode.id.toString();
-        //     const productIndex  = e.target.parentNode.parentNode.dataset.index; //Dataset index of item to be altered
-        //     console.log(productID, productIndex);
-            
-        //     /* Reduce count of item in shopping cart if more than 1, otherwise delete from cart */
-        //     productToUpdate = state.shoppingList.updateItem(productID);
-        //     updateItemInCartUI(productToUpdate, state.shoppingList.sum);
-        //     // updateItemInCartUI(productIndex, productToRemove, state.shoppingList.sum);
-        //     updateCartToStorage();
-        //     cartCountTotal();
-
-        //     /* If deleted item has count as 0, reset back to 1 */
-        //     state.shoppingList.restoreCount(state.products); 
-        // }
     });
 }
 
@@ -438,7 +430,7 @@ const likeProduct = ()=>{
 
     /* Add productID to likes array */
     document.querySelector(DOM.dashboard).addEventListener('click', (e)=>{
-        if(e.target.className === 'icon-basic-heart'){
+        if(e.target.className === 'fad fa-heart' && (e.target.parentNode.parentNode.className === 'product__capsule--icon' || e.target.parentNode.parentNode.className === 'product__btns--btn--icon')){
             e.preventDefault();
             const productID = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id.toString();
             likeStatus = state.likedProducts.setLike(productID, state.products);
@@ -489,6 +481,9 @@ window.addEventListener('load', ()=>{
     let productAddress = location.href;
     if(productAddress.slice(22, 28) === 'orders'){
         console.log('In the orders page, biish');
+
+        /* Some buttons to be hidden when user isnt logged in */
+        setupMenuEventListener(DOM["general-nav"]);
     }
 });
 

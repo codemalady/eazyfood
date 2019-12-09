@@ -14,6 +14,14 @@
     visibility: hidden;
     transition: all .5s ease;
 
+    @include respond(tab-port){
+        left: 50%;
+    }
+
+    @include respond(phone){
+        padding: 1.2rem 10rem 1rem 5rem;;
+    }
+
     &.active{
         bottom: 3rem;
         opacity: 1;

@@ -1,6 +1,6 @@
 .food-capsule{
     height: 10rem;
-    width: 100%;
+    width: 6rem;
     background-color: white;
     border: .1rem solid #F6F6F5;
     border-radius: 200rem;
@@ -8,6 +8,8 @@
     position: relative;
 
     @include respond(phone){
+        margin: 0 auto;
+        width: 7.5rem;
         height: 12rem;
     }
 

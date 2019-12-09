@@ -72,6 +72,10 @@
                     background-color: rgba(black, .8);
                     opacity: 0;
                     transition: all .3s;
+
+                    @include respond(tab-port){
+                        opacity: 1;
+                    }
                 }
                 
             }
@@ -166,8 +170,25 @@
         width: 80%;
         position: relative;
 
+        @include respond(tab-port){
+            width: 100%;
+        }
+
         @include respond(phone){
             width: 100%;
+            background-color: transparent;
+        }
+
+        &--content{
+            & > *{
+                margin: 0 auto;
+                transform: translateX(-13rem);
+
+                @include respond(tab-port){
+                    margin: 0 auto;
+                    transform: translateX(0);
+                }
+            }
         }
     }
 
@@ -254,7 +275,7 @@
 
             &--bag{
                 flex: 0 0 5rem;
-                margin-right: 2.5rem;
+                margin-right: 3rem;
                 position: relative;
 
                 &--icon{
@@ -370,6 +391,7 @@
                 
                 &--items{
                     margin: 1.5rem 0 3rem 0;
+                    // transform: translateX(-2.5rem);
                     // &:not(:last-child){
                     //     margin: 4rem 0 2rem 0;
                     // }
@@ -377,7 +399,7 @@
             }
 
             &--product{
-                width: 52.5rem;
+                width: 45rem;
                 display: flex;
                 justify-content: space-around;
                 align-items: center;
@@ -432,6 +454,16 @@
     &__header{
         padding: 3rem 0;
 
+        @include respond(tab-port){
+            & > * {
+                margin-left: 15rem;
+            }
+        }
+
+        @include respond(phone){
+            margin-left: -15rem;
+        }
+
         &--user{
             display: inline-block;
             font-size: 1.6rem;
@@ -457,6 +489,7 @@
 
             @include respond(phone){
                 font-size: 2rem;
+                // transform: translateX(2.5rem);
             }
         }
     }
@@ -471,9 +504,13 @@
         border-radius: .5rem;
 
         @include respond(phone){
-            width: 80%;
+            display: flex;
+            width: 40rem;
+            flex-shrink: 0;
+            flex-grow: 0;
             font-size: 2.5rem;
             padding: 1.5rem 1rem 1.5rem 6rem;
+            // transform: translateX(2.5rem);
         }
 
         &::-webkit-input-placeholder{
@@ -496,8 +533,8 @@
             box-shadow: 0 .1rem .4rem rgba(black, .1);
             padding: 1rem;
             max-height: 20rem;
-            width: 100%;
             z-index: 2;
+            width: 100%;
             position: absolute;
             top: 5rem;
             left: 0;
@@ -506,8 +543,12 @@
             visibility: hidden;
             overflow-y: scroll;
 
+            @include respond(tab-port){
+                max-height: 10.5rem;
+            }
+
             @include respond(phone){
-                width: 100%;
+                max-height: 9rem;
             }
 
             &.empty{
@@ -545,19 +586,24 @@
     }
 
     &__banner{
-        margin: 0 auto;
         height: 15rem;
-        width: 70%;
-        transform: translateX(-2rem);
+        width: 100%;
+        // transform: translateX(-2rem);
         border-radius: 1rem;
         background-color: #FFF7EE;
         overflow: hidden;
         position: relative;
 
-        @include respond(phone){
-            margin-top: -5rem;
-            width: 80%;
-            margin-left: 7.5rem;
+        &--container{
+            z-index: -1;
+            width: 70rem;
+            display: flex;
+            justify-content: center;
+
+            @include respond(phone){
+                // margin-top: -3rem;
+                width: 40rem;
+            }
         }
 
         &--img{
@@ -629,11 +675,15 @@
         margin-top: 7.5rem;
         
         @include respond(phone){
-            width: 80%;
+            width: 100%;
         }
         
         &--title{
             color: black;
+
+            @include respond(tab-port){
+                width: 100%;
+            }
         }
 
         &--checkbox{
@@ -647,6 +697,11 @@
             background-color: #FB7949;
             border-radius: 2rem;
             cursor: pointer;
+
+            // @include respond(tab-port){
+            //     display: flex;
+            //     padding: 1rem 3.5rem .5rem 3.5rem;
+            // }
 
             @include respond(phone){
                 padding: 1rem 3.5rem .5rem 3.5rem;
@@ -682,6 +737,13 @@
         right: 0;
         background-color: #FCFCFA;
         box-shadow: 0 .3rem .3rem rgba(black, .1);
+
+        @include respond(tab-port){
+            width: 0%;
+            opacity: 0;
+            height: 100%;
+            visibility: hidden;
+        }
 
         @include respond(phone){
             width: 0%;
@@ -781,7 +843,10 @@
 
             &--product{
                 height: 4rem;
-                // background-color: red;
+                width: 25rem;
+                background-color: firebrick;
+                display: flex;
+                justify-content: space-around;
                 margin-bottom: 1rem;
                 position: relative;
                 cursor: pointer;
@@ -806,6 +871,10 @@
                     position: relative;
                 }
 
+                & > * {
+                    align-self: center;
+                }
+
                 &--del{
                     font-size: 1.5rem;
                     position: absolute;
@@ -824,9 +893,10 @@
                     display: inline-block;
                     margin-left: .25rem;
                     font-size: 1.2rem;
-                    transform: translateY(-1.5rem);
+                    // transform: translateY(-1.5rem);
                     color: black;
                     font-weight: 700;
+                    // align-self: center;
                     // // padding: .5rem 0;
                     // width: 2rem;
                     // border-radius: .5rem;
@@ -837,7 +907,7 @@
                 &--times{
                     display: inline-block;
                     font-size: 1.1rem;
-                    transform: translateY(-1.5rem);
+                    // transform: translateY(-1.5rem);
                     color: black;
                 }
 
@@ -845,29 +915,30 @@
                     display: inline-block;
                     // width: 30%;
                     font-size: 1.2rem;
-                    transform: translateY(-1.5rem);
+                    // transform: translateY(-1.5rem);
                     color: black;
                     font-weight: 700;
                 }
 
                 &--btn{
                     display: inline-block;
-                    position: absolute;
-                    right: 4rem;
-                    top: 55%;
-                    transform: translateY(-50%);
-                    margin-left: .4rem;
+                    // position: absolute;
+                    // right: 4rem;
+                    // top: 55%;
+                    // transform: translateY(-50%);
+                    // margin-left: .4rem;
                     font-size: 1.1rem;
                     color: #D2B371;
                     // cursor: pointer;
+                    font-size: 1.5rem;
                 }
 
                 &--price{
-                    position: absolute;
-                    right: .25rem;
-                    top: 55%;
+                    // position: absolute;
+                    // right: .25rem;
+                    // top: 55%;
                     display: inline-block;
-                    transform: translateY(-50%);
+                    // transform: translateY(-50%);
                     font-size: 1.2rem;
                     color: #B3B3B2;
                     font-weight: 700;

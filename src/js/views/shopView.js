@@ -16,11 +16,11 @@ export const toggleMobileCart = ()=>{
         if (e.target.closest('.dashboard__navbar--bag')) {
             document.querySelector(DOM["dashboard-cart-bg"]).style.opacity = '1';
             document.querySelector(DOM["dashboard-cart-bg"]).style.visibility = 'visible';
-            document.querySelector(DOM["dashboard-cart-bg"]).style.width = '100vw';
+            document.querySelector(DOM["dashboard-cart-bg"]).style.width = '100%';
         }else if(e.target.parentNode.className === 'dashboard__cart--close'){
             document.querySelector(DOM["dashboard-cart-bg"]).style.opacity = '0';
             document.querySelector(DOM["dashboard-cart-bg"]).style.visibility = 'hidden';
-            document.querySelector(DOM["dashboard-cart-bg"]).style.width = '0vw';
+            document.querySelector(DOM["dashboard-cart-bg"]).style.width = '0%';
         }
     });
 }
@@ -46,8 +46,12 @@ export const addToCartUI = (product, totalValue)=>{
                         <p class="dashboard__cart--product--name">${product.name}</p>
                     </div>
                     <div class="dashboard__cart--product--controls">
-                        <span class="dashboard__cart--product--add"><i class="fal fa-plus-circle"></i></span>
-                        <span class="dashboard__cart--product--rmv"><i class="fal fa-minus-circle"></i></span>
+                        <span class="dashboard__cart--product--add">
+                            <i class="fal fa-plus-circle"></i>
+                        </span>
+                        <span class="dashboard__cart--product--rmv">
+                            <i class="fal fa-minus-circle"></i>
+                        </span>
                     </div>
                     <p class="dashboard__cart--product--price">${product.price}</p>
                 </div>
@@ -62,8 +66,12 @@ export const addToCartUI = (product, totalValue)=>{
                 <p class="dashboard__sidebar--cart--product--times">X</p>
                 <p class="dashboard__sidebar--cart--product--name">${product.name}</p>
                 <div class="dashboard__sidebar--cart--product--btn">
-                    <span class="dashboard__sidebar--cart--product--btn-add"><i class="fal fa-plus-circle"></i></span>
-                    <span class="dashboard__sidebar--cart--product--btn-rmv"><i class="fal fa-minus-circle"></i></span>
+                    <span class="dashboard__sidebar--cart--product--btn-add">
+                        <i class="fal fa-plus-circle"></i>
+                    </span>
+                    <span class="dashboard__sidebar--cart--product--btn-rmv">
+                        <i class="fal fa-minus-circle"></i>
+                    </span>
                 </div>
                 <p class="dashboard__sidebar--cart--product--price">${product.price}</p>
             </div>
@@ -116,8 +124,8 @@ export const updateItemInCartUI = (product, totalCartCost)=>{
             if(product.count === 0){
                 cartItem.parentElement.removeChild(cartItem);
             }else{
-                product.children[0].children[2].children[0].textContent = product.count;
-                product.children[0].children[4].textContent =  `${product.count * product.price}`;  
+                cartItem.children[0].children[2].children[0].textContent = product.count;
+                cartItem.children[0].children[4].textContent =  `${product.count * product.price}`;  
             }
         }
         // document.querySelector(DOM["dashboard__cart-value"]).textContent = `₦${totalCartCost}`;

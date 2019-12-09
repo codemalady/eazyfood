@@ -14,15 +14,15 @@ export class Product{
     }
 };
 
-// export const fetchProductsLocally = async()=>{
-//     try {
-//         let data = await fetch('http://127.0.0.1:8080/data/dummy.json');
-//         let res = await data.json();
-//         return res;
-//     } catch (e) {
-//         console.log(e);
-//     }
-// }
+export const fetchProductsLocally = async()=>{
+    try {
+        let data = await fetch('http://127.0.0.1:8080/data/dummy.json');
+        let res = await data.json();
+        return res;
+    } catch (e) {
+        console.log(e);
+    }
+}
 
 export const fetchProducts = async() => {
     try{

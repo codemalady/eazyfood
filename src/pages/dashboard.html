@@ -85,7 +85,7 @@
             <!-- SEARCHBAR AND USER -->
             <header class="dashboard__header u-mb-medium">
                 <div class="dashboard-row">
-                    <div class="col-1-of-3">
+                    <div class="col-1-of-3-h">
                         <span class="dashboard__menu--form">
                             <input type="checkbox" name="menu" id="menu" class="dashboard__menu--input">
                             <label for="menu" class="dashboard__menu--label">
@@ -98,7 +98,7 @@
                         <form action="#" class="dashboard__form">
                             <input type="text" class="dashboard__input" placeholder="search">
                             <span class="dashboard__form--icon"></span>
-                            <div class="dashboard__input--results">
+                            <div class="dashboard__input--results"></div>
                                 <!-- <h2 class="dashboard__input--results-text">No products found</h2> -->
                                 <!-- <a href="#" class="dashboard__input--results-link">Apple</a> -->
                             </div>
@@ -106,15 +106,17 @@
                     </div>
                 </div>
             </header>
-            <main>
+            <main class="dashboard__main--content">
                 <!-- DASHBOARD BANNER -->
-                <section class="dashboard__banner">
-                    <img src="../img/delivery-illustration.png" alt="Illustration" class="dashboard__banner--img">
-                    <h1 class="dashboard__banner--text">
-                        <span class="dashboard__banner--text--title">₦0 delivery for 30 days&nbsp;🎉</span>
-                        <span class="dashboard__banner--text--subtitle">₦0 deliveries for orders over ₦2000 for 30 days</span>
-                    </h1>
-                    <a href="#" class="dashboard__banner--btn">Learn more &rarr;</a>
+                <section class="dashboard__banner--container">
+                    <div class="dashboard__banner">
+                        <img src="../img/delivery-illustration.png" alt="Illustration" class="dashboard__banner--img">
+                        <h1 class="dashboard__banner--text">
+                            <span class="dashboard__banner--text--title">₦0 delivery for 30 days&nbsp;🎉</span>
+                            <span class="dashboard__banner--text--subtitle">₦0 deliveries for orders over ₦2000 for 30 days</span>
+                        </h1>
+                        <a href="#" class="dashboard__banner--btn">Learn more &rarr;</a>
+                    </div>
                 </section>
                 <!-- DASHBOARD MAARKETS -->
                 <section class="dashboard__markets">
@@ -138,7 +140,7 @@
                         </div>
                     </div>
                     <div class="u-mb-small"></div>
-                    <div class="dashboard-row" id="cat-box">
+                    <div class="category-row" id="cat-box">
                         <div class="col-1-of-10">
                             <div class="food-capsule active" id="fruits">
                                 <div class="food-capsule--icon-box">

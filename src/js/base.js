@@ -1,4 +1,5 @@
 export const DOM = {
+    'home' : '.homepage',
     'dashboard': '.dashboard',
     'dashboard-menu': '.dashboard__menu',
     'dashboard-menu-toggle': '.dashboard__menu--input',
@@ -7,6 +8,7 @@ export const DOM = {
     'dashboard-cart-product': '.dashboard__sidebar--cart--product',
     'dashboard__cart-value': '.dashboard__sidebar--price--value',
     'dashboard__cart-number': '.dashboard__sidebar--header--cart',
+    'dashboard__cart-number-mobile': '.dashboard__navbar--bag--label',
     'dashboard-nav': '.dashboard__menu__btns',
     'dashboard-mobile': '.dashboard__navbar--checkbox',
     'dashboard-tray' : '.dashboard__tray',
