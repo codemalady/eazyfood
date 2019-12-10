@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "EazyFood",
   "main": "index.js",
+  "homepage": "https://thepseudomind.github.io/eazyfood",
   "scripts": {
+    "predeploy" : "npm run build",
+    "deploy": "gh-pages -d dist",
     "compile-sass": "node-sass dist/sass/main.scss dist/css/index.css -w",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
@@ -25,6 +28,7 @@
     "@babel/polyfill": "^7.7.0",
     "axios": "^0.19.0",
     "firebase": "^7.5.0",
+    "gh-pages": "^2.1.1",
     "uniqid": "^5.1.0"
   }
 }
