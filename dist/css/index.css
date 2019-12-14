@@ -1518,6 +1518,11 @@ body {
       position: absolute;
       font-size: 1.25rem; }
 
+.dashboard__sliding-cart--input:checked ~ .dashboard__sidebar {
+  width: 35%;
+  opacity: 1;
+  visibility: visible; }
+
 .dashboard__sidebar {
   float: right;
   width: 25%;

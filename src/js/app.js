@@ -70,18 +70,18 @@ const toggleMobileMenu = ()=>{
     }
 }
 
-/* Function to toggle the menus if menu input label is checked  --- TABLET PORTRAIT */
-const toggleTabletMenu = ()=>{
-    if(document.querySelector('.dashboard__sliding-cart--input').checked){
-        document.querySelector('.dashboard__sidebar').style.opacity = '1';
-        document.querySelector('.dashboard__sidebar').style.visibility = 'visible';
-        document.querySelector('.dashboard__sidebar').style.width = '35%';
-    }else{
-        document.querySelector('.dashboard__sidebar').style.opacity = '0';
-        document.querySelector('.dashboard__sidebar').style.visibility = 'hidden';
-        document.querySelector('.dashboard__sidebar').style.width = '0%';
-    }
-}
+// /* Function to toggle the menus if menu input label is checked  --- TABLET PORTRAIT */
+// const toggleTabletMenu = ()=>{
+//     if(document.querySelector('.dashboard__sliding-cart--input').checked){
+//         document.querySelector('.dashboard__sidebar').style.opacity = '1';
+//         document.querySelector('.dashboard__sidebar').style.visibility = 'visible';
+//         document.querySelector('.dashboard__sidebar').style.width = '35%';
+//     }else{
+//         document.querySelector('.dashboard__sidebar').style.opacity = '0';
+//         document.querySelector('.dashboard__sidebar').style.visibility = 'hidden';
+//         document.querySelector('.dashboard__sidebar').style.width = '0%';
+//     }
+// }
 
 /* Event listener to be added to the menu button at initialization of webapp */
 const setupMenuEventListener = ()=>{
@@ -163,7 +163,7 @@ const setupMenuEventListener = ()=>{
     document.querySelector(DOM["dashboard-menu-toggle"]).checked = false;
     document.querySelector(DOM["dashboard-menu-toggle"]).addEventListener('click', toggleMenu);
     document.querySelector(DOM["dashboard-mobile"]).addEventListener('click', toggleMobileMenu);
-    document.querySelector(DOM["dashboard-body"]).addEventListener('click', toggleTabletMenu);
+    // document.querySelector(DOM["dashboard-body"]).addEventListener('click', toggleTabletMenu);
 }
 
 

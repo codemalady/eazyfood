@@ -797,6 +797,12 @@
         }
     }
 
+    &__sliding-cart--input:checked ~ &__sidebar{
+        width: 35%;
+        opacity: 1;
+        visibility: visible;
+    }
+
     &__sidebar{
         float: right;
         width: 25%;
